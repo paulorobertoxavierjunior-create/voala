@@ -13,61 +13,60 @@
     <h2>Dados do Contrato</h2>
 
     <label>Título / Nome do Contrato</label>
-    <input id="tituloContrato" type="text" value="Contrato Ana Paula Pessoa" />
+    <input id="tituloContrato" type="text" value="Contrato Jessica Coelho Pacheco" />
 
     <label>Nome do(a) Contratante</label>
-    <input id="nomeContratante" type="text" value="Ana Paula Pessoa" />
+    <input id="nomeContratante" type="text" value="Jessica Coelho Pacheco" />
 
     <label>CPF do(a) Contratante</label>
-    <input id="cpfContratante" type="text" value="516.397.342-87" />
+    <input id="cpfContratante" type="text" value="933.236.972-00" />
 
     <label>Endereço do(a) Contratante</label>
     <input id="endContratante" type="text"
-           value="Av. Frederico Baird, Condomínio Quinta das Marinas, casa 197 - Ponta Negra, Manaus - AM" />
+           value="Rua Boacha, nº 19A, Novo Aleixo, Manaus/AM" />
 
-    <label>Nome da Contratada</label>
+    <label>Nome da Contratada (responsável)</label>
     <input id="nomeContratada" type="text" value="Paulo Roberto Xavier Júnior" />
 
     <label>CPF da Contratada</label>
-    <input id="cpfContratada" type="text" value="060.610.386-40" />
+    <input id="cpfContratada" type="text" value="060.610.385-40" />
 
     <label>Endereço da Contratada</label>
     <input id="endContratada" type="text"
-           value="Rua José de Anchieta, 931, Alvorada, Manaus - AM" />
+           value="Rua Jaguaquara, nº 391, Alvorada, Manaus/AM" />
 
     <label>Data do Evento</label>
-    <input id="dataEvento" type="text" value="29/05/2026" />
+    <input id="dataEvento" type="text" value="25/07/2026" />
 
     <label>Horário do Evento</label>
-    <input id="horaEvento" type="text" value="19:00" />
+    <input id="horaEvento" type="text" value="19h" />
 
     <label>Local do Evento</label>
-    <input id="localEvento" type="text"
-           value="Av. Frederico Baird, Condomínio Quinta das Marinas, casa 197 - Ponta Negra (casa/gourmet)" />
+    <input id="localEvento" type="text" value="Village Festas" />
 
     <label>Número de Convidados</label>
-    <input id="numConvidados" type="text" value="20 convidados" />
+    <input id="numConvidados" type="text" value="150 adultos" />
 
     <label>Descrição do Serviço</label>
     <input id="descricaoServico" type="text" value="CREPE FRANCÊS" />
 
     <label>Tipo de Cardápio</label>
-    <input id="tipoCardapio" type="text" value="Cardápio Premium" />
+    <input id="tipoCardapio" type="text" value="Executivo" />
 
     <label>Cardápio Salgado</label>
     <input id="cardapioSalgado" type="text"
-           value="Muçarela, Frango cremoso, Calabresa acebolada, Carne seca com catupiry, Queijo e presunto, Corn bacon, Marguerita, Palmito c/ alho poró, Quatro queijos, Camarão baiano, Filé c/ shimeji, Filé ao gorgonzola" />
+           value="Muçarela, Peito de peru e queijo, Frango cremoso, Calabresa acebolada" />
 
     <label>Cardápio Doce</label>
     <input id="cardapioDoce" type="text"
-           value="Nutella c/ morango, Banana c/ canela, Banana c/ doce de leite, Prestígio, Crepe à la Suzete, Romeu e Julieta, Ovomaltine e Confeti" />
+           value="Banana com doce de leite, Nutella com morango, Ovomaltine, Chocolate ao leite com confete" />
 
     <label>Valor Total (R$)</label>
-    <input id="valorTotal" type="text" value="2.500,00" />
+    <input id="valorTotal" type="text" value="3.700,00" />
 
     <label>Valor Total por Extenso</label>
     <input id="valorExtenso" type="text"
-           value="dois mil e quinhentos reais" />
+           value="três mil e setecentos reais" />
 
     <label>Hora extra (R$ por funcionário)</label>
     <input id="horaExtra" type="text" value="30,00" />
@@ -85,7 +84,7 @@
     <input id="cidade" type="text" value="Manaus" />
 
     <label>Data de Assinatura (texto)</label>
-    <input id="dataAssinatura" type="text" value="25 de maio de 2026" />
+    <input id="dataAssinatura" type="text" value="08 de maio de 2026" />
 
     <button onclick="gerarContrato()">Visualizar Contrato</button>
     <button onclick="gerarPDF()">Gerar PDF</button>
@@ -94,9 +93,10 @@
   <!-- PREVIEW DO CONTRATO -->
   <div id="contrato">
     <div id="conteudo">
-      <p id="placeholder" style="color:#999;text-align:center;margin-top:80px;">
-        Ajuste os dados ao lado e clique em <strong>Visualizar Contrato</strong>.
-      </p>
+      <div id="colunas">
+        <div class="coluna" id="coluna-esquerda"></div>
+        <div class="coluna" id="coluna-direita"></div>
+      </div>
     </div>
   </div>
 
