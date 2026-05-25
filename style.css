@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background: #202020;
+  font-family: "Times New Roman", serif;
+}
+
+/* Painel lateral */
+#painel {
+  width: 360px;
+  min-width: 320px;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 20px 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#painel h2 {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#painel label {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+  color: #9ca3af;
+}
+
+#painel input {
+  width: 100%;
+  padding: 7px 9px;
+  border-radius: 6px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+#painel input:focus {
+  border-color: #60a5fa;
+}
+
+#painel button {
+  margin-top: 12px;
+  padding: 9px;
+  border: none;
+  border-radius: 6px;
+  background: #60a5fa;
+  color: #020617;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#painel button + button {
+  margin-top: 6px;
+  background: #22c55e;
+  color: #022c22;
+}
+
+#painel button:hover {
+  filter: brightness(1.05);
+}
+
+/* Área do contrato */
+#contrato {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #111;
+  overflow: auto;
+}
+
+/* Folha A4, centralizada */
+#conteudo {
+  width: 210mm;
+  height: 297mm;                /* 1 página A4 */
+  background: #ffffff;
+  color: #111111;
+  padding: 18mm 18mm 18mm 18mm;  /* margens simétricas */
+  box-shadow: 0 0 22px rgba(0,0,0,0.5);
+  font-size: 8pt;                /* fonte menor pra caber em 1 página */
+  line-height: 1.4;
+}
+
+/* Container das duas colunas */
+#colunas {
+  display: flex;
+  height: 100%;
+  gap: 8mm;
+}
+
+/* Cada coluna */
+.coluna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+}
+
+/* Título e subtítulo (saem na coluna esquerda) */
+.titulo {
+  text-align: center;
+  font-weight: bold;
+  font-size: 9pt;
+  margin-bottom: 3px;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: 7.5pt;
+  margin-bottom: 7px;
+}
+
+.partes {
+  margin-bottom: 3px;
+}
+
+.clausula-titulo {
+  font-weight: bold;
+  margin-top: 8px;
+  margin-bottom: 2px;
+}
+
+.clausula-texto {
+  margin-bottom: 4px;
+}
+
+.destaque {
+  font-weight: bold;
+}
+
+/* bloco final na coluna direita */
+.bloco-final {
+  margin-top: 10px;
+}
+
+.fecho {
+  margin-top: 4px;
+}
+
+/* Assinaturas na coluna direita */
+.assinaturas {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8mm;
+}
+
+.assinatura-bloco {
+  flex: 1;
+  text-align: center;
+  font-size: 7.5pt;
+}
+
+.assinatura-linha {
+  border-top: 1px solid #000;
+  margin-bottom: 3px;
+  margin-top: 18px;
+}
