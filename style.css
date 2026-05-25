@@ -11,7 +11,7 @@ body {
   font-family: "Times New Roman", serif;
 }
 
-/* PAINEL LATERAL */
+/* Painel lateral */
 #painel {
   width: 360px;
   min-width: 320px;
@@ -80,7 +80,7 @@ body {
   filter: brightness(1.05);
 }
 
-/* ÁREA DE PREVIEW */
+/* Área do contrato */
 #contrato {
   flex: 1;
   display: flex;
@@ -91,36 +91,43 @@ body {
   overflow: auto;
 }
 
-/* FOLHA A4 CENTRALIZADA */
+/* Folha A4 */
 #conteudo {
   width: 210mm;
   min-height: 297mm;
   background: #ffffff;
   color: #111111;
-  padding: 25mm 25mm 20mm 25mm;   /* margens mais simétricas */
+  padding: 25mm 25mm 22mm 25mm;
   box-shadow: 0 0 22px rgba(0,0,0,0.5);
   font-size: 11.5pt;
   line-height: 1.45;
   text-align: justify;
 }
 
-/* TÍTULO */
+/* Título principal do documento */
 #conteudo .titulo {
   text-align: center;
   font-weight: bold;
   font-size: 13pt;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 }
 
-/* DADOS DAS PARTES */
+/* Linha com o “nome do contrato” */
+#conteudo .subtitulo {
+  text-align: center;
+  font-size: 10.5pt;
+  margin-bottom: 14px;
+}
+
+/* Dados das partes */
 #conteudo .partes {
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
-/* CLÁUSULAS */
+/* Cláusulas */
 #conteudo .clausula-titulo {
   font-weight: bold;
-  margin-top: 8px;
+  margin-top: 9px;
 }
 
 #conteudo .clausula-texto {
@@ -131,17 +138,22 @@ body {
   font-weight: bold;
 }
 
-/* FECHO */
+/* Espaço grande antes do bloco final (ajuda a jogar assinaturas pra 2ª página) */
+#conteudo .bloco-final {
+  margin-top: 18px;
+}
+
+/* Fechamento e data */
 #conteudo .fecho {
   margin-top: 10px;
 }
 
-/* ASSINATURAS */
+/* Assinaturas */
 #conteudo .assinaturas {
-  margin-top: 35px;
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
-  gap: 40px;
+  gap: 60px;
 }
 
 .assinatura-bloco {
