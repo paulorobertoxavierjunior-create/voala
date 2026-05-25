@@ -2,130 +2,142 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Times New Roman', Times, serif;
 }
 
 body {
   display: flex;
   height: 100vh;
-  background: #f0f0f0;
+  background: #222;
+  font-family: "Times New Roman", serif;
 }
 
-/* Painel lateral */
+/* Painel lateral de dados */
 #painel {
-  width: 340px;
-  min-width: 300px;
-  background: #1e1e2e;
-  color: #fff;
-  padding: 24px 20px;
+  width: 360px;
+  min-width: 320px;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 20px 18px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 #painel h2 {
-  font-size: 18px;
-  margin-bottom: 12px;
-  color: #cdd6f4;
   font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
   text-align: center;
-  letter-spacing: 1px;
+  margin-bottom: 10px;
 }
 
 #painel label {
-  font-size: 11px;
-  color: #a6adc8;
   font-family: Arial, sans-serif;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 6px;
+  color: #9ca3af;
 }
 
 #painel input {
   width: 100%;
-  padding: 8px 10px;
+  padding: 7px 9px;
   border-radius: 6px;
-  border: 1px solid #45475a;
-  background: #313244;
-  color: #cdd6f4;
+  border: 1px solid #374151;
+  background: #111827;
+  color: #e5e7eb;
+  font-family: Arial, sans-serif;
   font-size: 13px;
   outline: none;
-  font-family: Arial, sans-serif;
 }
 
 #painel input:focus {
-  border-color: #89b4fa;
+  border-color: #60a5fa;
 }
 
 #painel button {
-  margin-top: 14px;
-  padding: 10px;
+  margin-top: 12px;
+  padding: 9px;
   border: none;
-  border-radius: 8px;
-  background: #89b4fa;
-  color: #1e1e2e;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
+  border-radius: 6px;
+  background: #60a5fa;
+  color: #111827;
   font-family: Arial, sans-serif;
-  transition: background 0.2s;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#painel button + button {
+  margin-top: 6px;
+  background: #22c55e;
+  color: #022c22;
 }
 
 #painel button:hover {
-  background: #74c7ec;
+  filter: brightness(1.05);
 }
 
-/* Área de preview */
+/* Área do contrato (preview) */
 #contrato {
   flex: 1;
-  overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px 20px;
-  background: #e0e0e0;
+  padding: 30px 10px;
+  background: #111;
+  overflow: auto;
 }
 
 /* Folha A4 */
 #conteudo {
   width: 210mm;
   min-height: 297mm;
-  background: #fff;
-  padding: 20mm 22mm 20mm 22mm;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-  font-size: 10.5pt;
-  line-height: 1.55;
-  color: #111;
+  background: #ffffff;
+  color: #111111;
+  padding: 20mm 20mm 20mm 20mm;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  font-size: 11pt;
+  line-height: 1.4;
   text-align: justify;
 }
 
+/* Título */
 #conteudo .titulo {
   text-align: center;
-  font-size: 13pt;
   font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-}
-
-#conteudo .partes {
+  font-size: 12pt;
   margin-bottom: 10px;
 }
 
-#conteudo .clausula {
-  margin-bottom: 6px;
+/* Dados iniciais */
+#conteudo .partes {
+  margin-bottom: 4px;
 }
 
-#conteudo .clausula strong {
+/* Cláusulas com barra de abertura */
+#conteudo .clausula-titulo {
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+#conteudo .clausula-texto {
+  margin-bottom: 4px;
+}
+
+/* Parágrafos em negrito dentro da cláusula */
+#conteudo .destaque {
   font-weight: bold;
 }
 
+/* Fecho e foro */
 #conteudo .fecho {
   margin-top: 10px;
-  margin-bottom: 15px;
 }
 
+/* Assinaturas */
 #conteudo .assinaturas {
   margin-top: 30px;
   display: flex;
@@ -133,17 +145,14 @@ body {
   gap: 40px;
 }
 
-#conteudo .assinatura-bloco {
+.assinatura-bloco {
   flex: 1;
   text-align: center;
-}
-
-#conteudo .assinatura-bloco .linha {
-  border-top: 1px solid #111;
-  margin-bottom: 6px;
-}
-
-#conteudo .assinatura-bloco p {
   font-size: 10pt;
-  line-height: 1.4;
+}
+
+.assinatura-linha {
+  border-top: 1px solid #000;
+  margin-bottom: 4px;
+  margin-top: 40px;
 }
