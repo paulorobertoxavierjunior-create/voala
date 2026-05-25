@@ -120,14 +120,15 @@ function gerarContrato() {
 }
 
 function gerarPDF() {
-  gerarContrato(); // garante que o conteúdo está atualizado
+  gerarContrato(); // garante conteúdo atualizado
+
   const elemento = document.getElementById("conteudo");
 
   const opcoes = {
-    margin:       [10, 10, 10, 10],
+    margin:       [5, 5, 5, 5],          // margens internas do PDF
     filename:     "contrato-voala.pdf",
     image:        { type: "jpeg", quality: 0.98 },
-    html2canvas:  { scale: 2, useCORS: true },
+    html2canvas:  { scale: 3, useCORS: true }, // mais nítido
     jsPDF:        { unit: "mm", format: "a4", orientation: "portrait" }
   };
 
