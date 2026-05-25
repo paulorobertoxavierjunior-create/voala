@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gerador de Contrato – VOALÁ! BUFFET</title>
+  <title>Contrato – VOALÁ! BUFFET</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,48 +13,63 @@
     <h2>Dados do Contrato</h2>
 
     <label>Nome do Contratante</label>
-    <input id="nomeContratante" type="text" value="Jessica Coelho Pacheco" />
+    <input id="nomeContratante" type="text" value="Ana Paula Pessoa" />
 
     <label>CPF do Contratante</label>
-    <input id="cpfContratante" type="text" value="933.236.972-00" />
+    <input id="cpfContratante" type="text" value="516.397.342-87" />
 
     <label>Endereço do Contratante</label>
-    <input id="endContratante" type="text" value="Rua Boacha, nº 19A, Novo Aleixo, Manaus/AM" />
+    <input id="endContratante" type="text"
+           value="Av. Frederico Baird, Condomínio Quinta das Marinas, casa 197 - Ponta Negra, Manaus - AM" />
 
     <label>Representante da Contratada</label>
     <input id="nomeContratada" type="text" value="Paulo Roberto Xavier Júnior" />
 
     <label>CPF do Representante</label>
-    <input id="cpfContratada" type="text" value="060.610.385-40" />
+    <input id="cpfContratada" type="text" value="060.610.386-40" />
 
     <label>Endereço do Representante</label>
-    <input id="endContratada" type="text" value="Rua Jaguaquara, nº 391, Alvorada, Manaus/AM" />
+    <input id="endContratada" type="text"
+           value="Rua José de Anchieta, 931, Alvorada, Manaus, AM" />
 
     <label>Data do Evento</label>
-    <input id="dataEvento" type="text" value="25/07/2026" />
+    <input id="dataEvento" type="text" value="29/05/2026" />
 
     <label>Horário do Evento</label>
-    <input id="horaEvento" type="text" value="19h" />
+    <input id="horaEvento" type="text" value="19:00" />
 
     <label>Local do Evento</label>
-    <input id="localEvento" type="text" value="Village Festas" />
+    <input id="localEvento" type="text"
+           value="Av. Frederico Baird, Condomínio Quinta das Marinas, casa 197 - Ponta Negra (casa/gourmet)" />
 
     <label>Número de Convidados</label>
-    <input id="numConvidados" type="text" value="150 adultos" />
+    <input id="numConvidados" type="text" value="20 convidados" />
+
+    <label>Descrição do Serviço (ex.: CREPE FRANCÊS)</label>
+    <input id="descricaoServico" type="text" value="CREPE FRANCÊS" />
+
+    <label>Tipo de Cardápio</label>
+    <input id="tipoCardapio" type="text" value="Cardápio Premium" />
 
     <label>Cardápio Salgado</label>
-    <input id="cardapioSalgado" type="text" value="Muçarela, Peito de Peru e Queijo, Frango Cremoso, Calabresa Acebolada" />
+    <input id="cardapioSalgado" type="text"
+           value="Muçarela, Frango cremoso, Calabresa acebolada, Carne seca com catupiry, Queijo e presunto, Corn bacon, Marguerita, Palmito c/ alho poró, Quatro queijos, Camarão baiano, Filé c/ shimeji, Filé ao gorgonzola" />
 
     <label>Cardápio Doce</label>
-    <input id="cardapioDoce" type="text" value="Banana com doce de leite, Nutella com morango, Ovomaltine, Chocolate ao leite com confete" />
+    <input id="cardapioDoce" type="text"
+           value="Nutella c/ morango, Banana c/ canela, Banana c/ doce de leite, Prestígio, Crepe a lá Suzete, Romeu e Julieta, Ovomaltine e Confeti" />
 
     <label>Valor Total (R$)</label>
-    <input id="valorTotal" type="text" value="3.700,00" />
+    <input id="valorTotal" type="text" value="2.500,00" />
 
     <label>Valor Total por Extenso</label>
-    <input id="valorExtenso" type="text" value="três mil e setecentos reais" />
+    <input id="valorExtenso" type="text"
+           value="dois mil e quinhentos reais" />
 
-    <label>Preço Taça Refrigerante (R$)</label>
+    <label>Hora extra (R$ por funcionário)</label>
+    <input id="horaExtra" type="text" value="30,00" />
+
+    <label>Preço Taça (R$)</label>
     <input id="precoTaça" type="text" value="10,00" />
 
     <label>Preço Prato (R$)</label>
@@ -66,22 +81,23 @@
     <label>Cidade/Comarca</label>
     <input id="cidade" type="text" value="Manaus" />
 
-    <label>Data de Assinatura</label>
-    <input id="dataAssinatura" type="text" value="08 de maio de 2026" />
+    <label>Data de Assinatura (texto)</label>
+    <input id="dataAssinatura" type="text" value="25 de maio de 2026" />
 
     <button onclick="gerarContrato()">Visualizar Contrato</button>
-    <button onclick="gerarPDF()">⬇ Baixar PDF</button>
+    <button onclick="gerarPDF()">Gerar PDF</button>
   </div>
 
-  <!-- ÁREA DE PREVIEW DO CONTRATO -->
+  <!-- PREVIEW DO CONTRATO -->
   <div id="contrato">
     <div id="conteudo">
-      <p id="placeholder" style="color:#aaa;text-align:center;margin-top:80px;">
+      <p id="placeholder" style="color:#999;text-align:center;margin-top:80px;">
         Ajuste os dados ao lado e clique em <strong>Visualizar Contrato</strong>.
       </p>
     </div>
   </div>
 
+  <!-- Lib p/ gerar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="contrato.js"></script>
 </body>
