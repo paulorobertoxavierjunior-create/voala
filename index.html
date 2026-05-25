@@ -12,25 +12,28 @@
   <div id="painel">
     <h2>Dados do Contrato</h2>
 
-    <label>Nome do Contratante</label>
+    <label>Título / Nome do Contrato</label>
+    <input id="tituloContrato" type="text" value="Contrato Ana Paula Pessoa" />
+
+    <label>Nome do(a) Contratante</label>
     <input id="nomeContratante" type="text" value="Ana Paula Pessoa" />
 
-    <label>CPF do Contratante</label>
+    <label>CPF do(a) Contratante</label>
     <input id="cpfContratante" type="text" value="516.397.342-87" />
 
-    <label>Endereço do Contratante</label>
+    <label>Endereço do(a) Contratante</label>
     <input id="endContratante" type="text"
            value="Av. Frederico Baird, Condomínio Quinta das Marinas, casa 197 - Ponta Negra, Manaus - AM" />
 
-    <label>Representante da Contratada</label>
+    <label>Nome da Contratada</label>
     <input id="nomeContratada" type="text" value="Paulo Roberto Xavier Júnior" />
 
-    <label>CPF do Representante</label>
+    <label>CPF da Contratada</label>
     <input id="cpfContratada" type="text" value="060.610.386-40" />
 
-    <label>Endereço do Representante</label>
+    <label>Endereço da Contratada</label>
     <input id="endContratada" type="text"
-           value="Rua José de Anchieta, 931, Alvorada, Manaus, AM" />
+           value="Rua José de Anchieta, 931, Alvorada, Manaus - AM" />
 
     <label>Data do Evento</label>
     <input id="dataEvento" type="text" value="29/05/2026" />
@@ -45,7 +48,7 @@
     <label>Número de Convidados</label>
     <input id="numConvidados" type="text" value="20 convidados" />
 
-    <label>Descrição do Serviço (ex.: CREPE FRANCÊS)</label>
+    <label>Descrição do Serviço</label>
     <input id="descricaoServico" type="text" value="CREPE FRANCÊS" />
 
     <label>Tipo de Cardápio</label>
@@ -57,7 +60,7 @@
 
     <label>Cardápio Doce</label>
     <input id="cardapioDoce" type="text"
-           value="Nutella c/ morango, Banana c/ canela, Banana c/ doce de leite, Prestígio, Crepe a lá Suzete, Romeu e Julieta, Ovomaltine e Confeti" />
+           value="Nutella c/ morango, Banana c/ canela, Banana c/ doce de leite, Prestígio, Crepe à la Suzete, Romeu e Julieta, Ovomaltine e Confeti" />
 
     <label>Valor Total (R$)</label>
     <input id="valorTotal" type="text" value="2.500,00" />
@@ -97,7 +100,6 @@
     </div>
   </div>
 
-  <!-- Lib p/ gerar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="contrato.js"></script>
 </body>
