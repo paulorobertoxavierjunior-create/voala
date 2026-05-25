@@ -11,7 +11,7 @@ body {
   background: #f0f0f0;
 }
 
-/* PAINEL LATERAL */
+/* Painel lateral */
 #painel {
   width: 340px;
   min-width: 300px;
@@ -76,7 +76,7 @@ body {
   background: #74c7ec;
 }
 
-/* ÁREA DE PREVIEW */
+/* Área de preview */
 #contrato {
   flex: 1;
   overflow-y: auto;
@@ -87,7 +87,7 @@ body {
   background: #e0e0e0;
 }
 
-/* FOLHA A4 */
+/* Folha A4 */
 #conteudo {
   width: 210mm;
   min-height: 297mm;
@@ -97,9 +97,9 @@ body {
   font-size: 10.5pt;
   line-height: 1.55;
   color: #111;
+  text-align: justify;
 }
 
-/* TÍTULO */
 #conteudo .titulo {
   text-align: center;
   font-size: 13pt;
@@ -109,31 +109,23 @@ body {
   text-transform: uppercase;
 }
 
-/* PARTES */
 #conteudo .partes {
-  text-align: justify;
   margin-bottom: 10px;
 }
 
-/* CLÁUSULAS */
 #conteudo .clausula {
-  text-align: justify;
   margin-bottom: 6px;
-  text-indent: 0;
 }
 
 #conteudo .clausula strong {
   font-weight: bold;
 }
 
-/* FECHO */
 #conteudo .fecho {
-  text-align: justify;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-/* ASSINATURAS */
 #conteudo .assinaturas {
   margin-top: 30px;
   display: flex;
