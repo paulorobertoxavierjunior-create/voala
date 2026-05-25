@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background: #f0f0f0;
+}
+
+/* PAINEL LATERAL */
+#painel {
+  width: 340px;
+  min-width: 300px;
+  background: #1e1e2e;
+  color: #fff;
+  padding: 24px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#painel h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #cdd6f4;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+#painel label {
+  font-size: 11px;
+  color: #a6adc8;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+
+#painel input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #45475a;
+  background: #313244;
+  color: #cdd6f4;
+  font-size: 13px;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+
+#painel input:focus {
+  border-color: #89b4fa;
+}
+
+#painel button {
+  margin-top: 14px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #89b4fa;
+  color: #1e1e2e;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: background 0.2s;
+}
+
+#painel button:hover {
+  background: #74c7ec;
+}
+
+/* ÁREA DE PREVIEW */
+#contrato {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background: #e0e0e0;
+}
+
+/* FOLHA A4 */
+#conteudo {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  padding: 20mm 22mm 20mm 22mm;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: #111;
+}
+
+/* TÍTULO */
+#conteudo .titulo {
+  text-align: center;
+  font-size: 13pt;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+/* PARTES */
+#conteudo .partes {
+  text-align: justify;
+  margin-bottom: 10px;
+}
+
+/* CLÁUSULAS */
+#conteudo .clausula {
+  text-align: justify;
+  margin-bottom: 6px;
+  text-indent: 0;
+}
+
+#conteudo .clausula strong {
+  font-weight: bold;
+}
+
+/* FECHO */
+#conteudo .fecho {
+  text-align: justify;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* ASSINATURAS */
+#conteudo .assinaturas {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+#conteudo .assinatura-bloco {
+  flex: 1;
+  text-align: center;
+}
+
+#conteudo .assinatura-bloco .linha {
+  border-top: 1px solid #111;
+  margin-bottom: 6px;
+}
+
+#conteudo .assinatura-bloco p {
+  font-size: 10pt;
+  line-height: 1.4;
+}
