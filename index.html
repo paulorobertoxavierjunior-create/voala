@@ -13,52 +13,61 @@
     <h2>Dados do Contrato</h2>
 
     <label>Nome do Contratante</label>
-    <input id="nomeContratante" type="text" placeholder="Ex: Jessica Coelho Pacheco" />
+    <input id="nomeContratante" type="text" value="Jessica Coelho Pacheco" />
 
     <label>CPF do Contratante</label>
-    <input id="cpfContratante" type="text" placeholder="Ex: 933.236.972-00" />
+    <input id="cpfContratante" type="text" value="933.236.972-00" />
 
     <label>Endereço do Contratante</label>
-    <input id="endContratante" type="text" placeholder="Ex: Rua Boacha, nº 19A, Novo Aleixo, Manaus/AM" />
+    <input id="endContratante" type="text" value="Rua Boacha, nº 19A, Novo Aleixo, Manaus/AM" />
 
     <label>Representante da Contratada</label>
-    <input id="nomeContratada" type="text" placeholder="Ex: Paulo Roberto Xavier Júnior" />
+    <input id="nomeContratada" type="text" value="Paulo Roberto Xavier Júnior" />
 
     <label>CPF do Representante</label>
-    <input id="cpfContratada" type="text" placeholder="Ex: 060.610.385-40" />
+    <input id="cpfContratada" type="text" value="060.610.385-40" />
 
     <label>Endereço do Representante</label>
-    <input id="endContratada" type="text" placeholder="Ex: Rua Jaguaquara, nº 391, Alvorada, Manaus/AM" />
+    <input id="endContratada" type="text" value="Rua Jaguaquara, nº 391, Alvorada, Manaus/AM" />
 
     <label>Data do Evento</label>
-    <input id="dataEvento" type="text" placeholder="Ex: 25/07/2026" />
+    <input id="dataEvento" type="text" value="25/07/2026" />
 
     <label>Horário do Evento</label>
-    <input id="horaEvento" type="text" placeholder="Ex: 19h" />
+    <input id="horaEvento" type="text" value="19h" />
 
     <label>Local do Evento</label>
-    <input id="localEvento" type="text" placeholder="Ex: Village Festas" />
+    <input id="localEvento" type="text" value="Village Festas" />
 
     <label>Número de Convidados</label>
-    <input id="numConvidados" type="text" placeholder="Ex: 150 adultos" />
+    <input id="numConvidados" type="text" value="150 adultos" />
 
     <label>Cardápio Salgado</label>
-    <input id="cardapioSalgado" type="text" placeholder="Ex: Muçarela, Peito de Peru e Queijo, Frango Cremoso, Calabresa Acebolada" />
+    <input id="cardapioSalgado" type="text" value="Muçarela, Peito de Peru e Queijo, Frango Cremoso, Calabresa Acebolada" />
 
     <label>Cardápio Doce</label>
-    <input id="cardapioDoce" type="text" placeholder="Ex: Banana com doce de leite, Nutella com morango, Ovomaltine, Chocolate ao leite com confete" />
+    <input id="cardapioDoce" type="text" value="Banana com doce de leite, Nutella com morango, Ovomaltine, Chocolate ao leite com confete" />
 
     <label>Valor Total (R$)</label>
-    <input id="valorTotal" type="text" placeholder="Ex: 3.700,00" />
+    <input id="valorTotal" type="text" value="3.700,00" />
 
     <label>Valor Total por Extenso</label>
-    <input id="valorExtenso" type="text" placeholder="Ex: três mil e setecentos reais" />
+    <input id="valorExtenso" type="text" value="três mil e setecentos reais" />
+
+    <label>Preço Taça Refrigerante (R$)</label>
+    <input id="precoTaça" type="text" value="10,00" />
+
+    <label>Preço Prato (R$)</label>
+    <input id="precoPrato" type="text" value="15,00" />
+
+    <label>Preço Talher (R$)</label>
+    <input id="precoTalher" type="text" value="7,00" />
 
     <label>Cidade/Comarca</label>
-    <input id="cidade" type="text" placeholder="Ex: Manaus" />
+    <input id="cidade" type="text" value="Manaus" />
 
     <label>Data de Assinatura</label>
-    <input id="dataAssinatura" type="text" placeholder="Ex: 08 de maio de 2026" />
+    <input id="dataAssinatura" type="text" value="08 de maio de 2026" />
 
     <button onclick="gerarContrato()">Visualizar Contrato</button>
     <button onclick="gerarPDF()">⬇ Baixar PDF</button>
@@ -68,7 +77,7 @@
   <div id="contrato">
     <div id="conteudo">
       <p id="placeholder" style="color:#aaa;text-align:center;margin-top:80px;">
-        Preencha os campos ao lado e clique em <strong>Visualizar Contrato</strong>.
+        Ajuste os dados ao lado e clique em <strong>Visualizar Contrato</strong>.
       </p>
     </div>
   </div>
