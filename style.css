@@ -91,79 +91,92 @@ body {
   overflow: auto;
 }
 
-/* Folha A4 */
+/* Folha A4 centralizada */
 #conteudo {
   width: 210mm;
-  min-height: 297mm;
+  height: 297mm;             /* 1 página A4 */
   background: #ffffff;
   color: #111111;
-  padding: 25mm 25mm 22mm 25mm;
+  padding: 20mm 22mm 20mm 22mm;  /* margens simétricas e mais “centradas” */
   box-shadow: 0 0 22px rgba(0,0,0,0.5);
-  font-size: 11.5pt;
-  line-height: 1.45;
+  font-size: 8.3pt;          /* levemente menor para caber com mais respiro */
+  line-height: 1.4;
+}
+
+/* Container das duas colunas */
+#colunas {
+  display: flex;
+  height: 100%;
+  gap: 10mm;                 /* espaço entre colunas */
+}
+
+/* Cada coluna */
+.coluna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   text-align: justify;
 }
 
-/* Título principal do documento */
-#conteudo .titulo {
+/* Título (apenas esquerda) */
+.titulo {
   text-align: center;
   font-weight: bold;
-  font-size: 13pt;
+  font-size: 9.5pt;
+  margin-bottom: 6px;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: 8pt;
+  margin-bottom: 10px;
+}
+
+.partes {
   margin-bottom: 4px;
 }
 
-/* Linha com o “nome do contrato” */
-#conteudo .subtitulo {
-  text-align: center;
-  font-size: 10.5pt;
-  margin-bottom: 14px;
-}
-
-/* Dados das partes */
-#conteudo .partes {
-  margin-bottom: 5px;
-}
-
-/* Cláusulas */
-#conteudo .clausula-titulo {
+/* Aqui é onde damos “mais espaço” entre cláusulas */
+.clausula-titulo {
   font-weight: bold;
-  margin-top: 9px;
+  margin-top: 10px;          /* antes era ~6px, aumentei */
+  margin-bottom: 2px;
 }
 
-#conteudo .clausula-texto {
-  margin-bottom: 4px;
+.clausula-texto {
+  margin-bottom: 5px;        /* mais espaço após o texto */
 }
 
-#conteudo .destaque {
+.destaque {
   font-weight: bold;
 }
 
-/* Espaço grande antes do bloco final (ajuda a jogar assinaturas pra 2ª página) */
-#conteudo .bloco-final {
-  margin-top: 18px;
+/* Bloco final na coluna direita */
+.bloco-final {
+  margin-top: 16px;          /* espaço extra antes do fecho */
 }
 
-/* Fechamento e data */
-#conteudo .fecho {
-  margin-top: 10px;
+/* Fecho e data */
+.fecho {
+  margin-top: 6px;
 }
 
 /* Assinaturas */
-#conteudo .assinaturas {
-  margin-top: 40px;
+.assinaturas {
+  margin-top: 22px;          /* mais afastado do texto */
   display: flex;
   justify-content: space-between;
-  gap: 60px;
+  gap: 10mm;
 }
 
 .assinatura-bloco {
   flex: 1;
   text-align: center;
-  font-size: 10.5pt;
+  font-size: 8pt;
 }
 
 .assinatura-linha {
   border-top: 1px solid #000;
-  margin-bottom: 4px;
-  margin-top: 40px;
+  margin-bottom: 3px;
+  margin-top: 22px;
 }
