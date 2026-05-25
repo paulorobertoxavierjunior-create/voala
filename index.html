@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerador de Contrato – VOALÁ! BUFFET</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- PAINEL DE CAMPOS -->
+  <div id="painel">
+    <h2>Dados do Contrato</h2>
+
+    <label>Nome do Contratante</label>
+    <input id="nomeContratante" type="text" placeholder="Ex: Jessica Coelho Pacheco" />
+
+    <label>CPF do Contratante</label>
+    <input id="cpfContratante" type="text" placeholder="Ex: 933.236.972-00" />
+
+    <label>Endereço do Contratante</label>
+    <input id="endContratante" type="text" placeholder="Ex: Rua Boacha, nº 19A, Novo Aleixo, Manaus/AM" />
+
+    <label>Representante da Contratada</label>
+    <input id="nomeContratada" type="text" placeholder="Ex: Paulo Roberto Xavier Júnior" />
+
+    <label>CPF do Representante</label>
+    <input id="cpfContratada" type="text" placeholder="Ex: 060.610.385-40" />
+
+    <label>Endereço do Representante</label>
+    <input id="endContratada" type="text" placeholder="Ex: Rua Jaguaquara, nº 391, Alvorada, Manaus/AM" />
+
+    <label>Data do Evento</label>
+    <input id="dataEvento" type="text" placeholder="Ex: 25/07/2026" />
+
+    <label>Horário do Evento</label>
+    <input id="horaEvento" type="text" placeholder="Ex: 19h" />
+
+    <label>Local do Evento</label>
+    <input id="localEvento" type="text" placeholder="Ex: Village Festas" />
+
+    <label>Número de Convidados</label>
+    <input id="numConvidados" type="text" placeholder="Ex: 150 adultos" />
+
+    <label>Cardápio Salgado</label>
+    <input id="cardapioSalgado" type="text" placeholder="Ex: Muçarela, Peito de Peru e Queijo, Frango Cremoso, Calabresa Acebolada" />
+
+    <label>Cardápio Doce</label>
+    <input id="cardapioDoce" type="text" placeholder="Ex: Banana com doce de leite, Nutella com morango, Ovomaltine, Chocolate ao leite com confete" />
+
+    <label>Valor Total (R$)</label>
+    <input id="valorTotal" type="text" placeholder="Ex: 3.700,00" />
+
+    <label>Valor Total por Extenso</label>
+    <input id="valorExtenso" type="text" placeholder="Ex: três mil e setecentos reais" />
+
+    <label>Cidade/Comarca</label>
+    <input id="cidade" type="text" placeholder="Ex: Manaus" />
+
+    <label>Data de Assinatura</label>
+    <input id="dataAssinatura" type="text" placeholder="Ex: 08 de maio de 2026" />
+
+    <button onclick="gerarContrato()">Visualizar Contrato</button>
+    <button onclick="gerarPDF()">⬇ Baixar PDF</button>
+  </div>
+
+  <!-- ÁREA DE PREVIEW DO CONTRATO -->
+  <div id="contrato">
+    <div id="conteudo">
+      <p id="placeholder" style="color:#aaa;text-align:center;margin-top:80px;">
+        Preencha os campos ao lado e clique em <strong>Visualizar Contrato</strong>.
+      </p>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="contrato.js"></script>
+</body>
+</html>
