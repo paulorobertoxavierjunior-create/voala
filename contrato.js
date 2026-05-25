@@ -34,89 +34,107 @@ function gerarContrato() {
   const cidade          = v("cidade");
   const dataAssinatura  = v("dataAssinatura");
 
-  const html = `
+  // COLUNA ESQUERDA – até Cláusula 8
+  const colunaEsquerda = `
     <div class="titulo">CONTRATO DE PRESTAÇÃO DE SERVIÇO</div>
     <div class="subtitulo">${tituloContrato}</div>
 
-    <p class="partes"><span class="destaque">CONTRATANTE:</span> ${nomeContratante}, inscrito(a) no CPF sob o nº ${cpfContratante}, residente e domiciliado(a) em ${endContratante}.</p>
-    <p class="partes"><span class="destaque">CONTRATADA:</span> VOALÁ! BUFFET, representada por ${nomeContratada}, CPF nº ${cpfContratada}, com endereço em ${endContratada}.</p>
+    <p class="partes"><span class="destaque">CONTRATANTE:</span> ${nomeContratante}, CPF ${cpfContratante}, residente em ${endContratante}.</p>
+    <p class="partes"><span class="destaque">CONTRATADA:</span> VOALÁ! BUFFET, representada por ${nomeContratada}, CPF ${cpfContratada}, residente em ${endContratada}.</p>
 
     <p class="partes">
-      As partes acima identificadas resolvem firmar o presente Contrato de Prestação de Serviço, que será regido pelas cláusulas e condições a seguir.
+      As partes acima identificadas têm entre si, justo e acertado, o presente Contrato de Prestação de Serviços, que se regerá pelas cláusulas seguintes:
     </p>
 
-    <p class="clausula-titulo">| Cláusula 1ª – Objeto</p>
+    <p class="clausula-titulo">Cláusula 1ª – Objeto</p>
     <p class="clausula-texto">
-      O presente contrato tem por objeto a prestação, pela CONTRATADA, do serviço de ${descricaoServ} em evento a ser realizado em ${dataEvento}, às ${horaEvento}, no endereço ${localEvento}, para ${numConvidados}.
+      É objeto deste contrato a prestação, pela CONTRATADA à CONTRATANTE, do serviço de ${descricaoServ} em evento a ser realizado na data de ${dataEvento}, às ${horaEvento}, no ${localEvento}, para ${numConvidados}.
     </p>
 
-    <p class="clausula-titulo">| Cláusula 2ª – Responsabilidades</p>
+    <p class="clausula-titulo">Cláusula 2ª – Estrutura e condições do local</p>
     <p class="clausula-texto">
-      A CONTRATANTE se responsabiliza por disponibilizar espaço adequado em condições de higiene e limpeza, incluindo pia, geladeira/freezer, fogão e área para armazenamento dos insumos.
+      A CONTRATANTE fica responsável por oferecer o espaço do evento em condições adequadas de higiene e limpeza, devendo ser disponibilizados: pia para lavagem de utensílios, geladeira com freezer, fogão para aquecimento dos recheios e espaço para armazenamento dos insumos.
     </p>
     <p class="clausula-texto">
-      <span class="destaque">Parágrafo primeiro:</span> O cardápio contratado é o ${tipoCardapio}. <span class="destaque">Salgados:</span> ${cardSalgado}. <span class="destaque">Doces:</span> ${cardDoce}.
+      <span class="destaque">Parágrafo primeiro:</span> O cardápio escolhido é o ${tipoCardapio.toUpperCase()}. Crepes salgados: ${cardSalgado}. Crepes doces: ${cardDoce}.
     </p>
     <p class="clausula-texto">
-      <span class="destaque">Parágrafo segundo:</span> A CONTRATADA chegará ao local com antecedência mínima de 1 (uma) hora do horário de início do evento, prestando o serviço por 4 (quatro) horas consecutivas.
+      <span class="destaque">Parágrafo segundo:</span> A CONTRATADA chegará ao evento com antecedência de 1 (uma) hora do horário estabelecido na Cláusula 1ª e oferecerá o serviço de buffet por 4 (quatro) horas a partir do horário de início do evento.
     </p>
     <p class="clausula-texto">
-      <span class="destaque">Parágrafo terceiro:</span> Havendo necessidade de prorrogação do horário, poderá ser cobrada hora extra ao valor de R$ ${horaExtra} por funcionário, condicionada a acordo entre as partes.
-    </p>
-
-    <p class="clausula-titulo">| Cláusula 3ª – Material</p>
-    <p class="clausula-texto">
-      A CONTRATADA fornecerá todo o material necessário para o serviço de buffet, incluindo mesa principal, descartáveis e guardanapos, não estando incluídos móveis, toalhas, taças de vidro, pratos de porcelana, talheres de metal ou ornamentação do ambiente.
+      <span class="destaque">Parágrafo terceiro:</span> Caso haja necessidade de ultrapassar o horário de encerramento do evento, será cobrado o valor de R$ ${horaExtra} por funcionário, a título de hora extra, mediante acordo entre as partes.
     </p>
 
-    <p class="clausula-titulo">| Cláusula 4ª – Equipe</p>
+    <p class="clausula-titulo">Cláusula 3ª – Materiais fornecidos</p>
     <p class="clausula-texto">
-      Para execução do serviço, a CONTRATADA disponibilizará ao menos 1 (um) crepeiro e 1 (um) auxiliar, podendo acrescentar garçom(garçons) conforme necessidade do evento.
+      A CONTRATADA fornecerá todo o material necessário para servir os crepes: mesa principal, descartáveis e guardanapos.
+    </p>
+    <p class="clausula-texto">
+      <span class="destaque">Parágrafo único:</span> A CONTRATADA não oferece toalhas, taças para vinhos/espumantes, pratos de sobremesa, mesas, cadeiras, ornamentação do salão ou qualquer outro item não especificado neste contrato.
     </p>
 
-    <p class="clausula-titulo">| Cláusula 5ª – Remuneração</p>
+    <p class="clausula-titulo">Cláusula 4ª – Equipe</p>
     <p class="clausula-texto">
-      Pelo serviço contratado, a CONTRATANTE pagará à CONTRATADA o valor total de R$ ${valorTotal} (${valorExtenso}), da seguinte forma: 20% (vinte por cento) na assinatura deste contrato, 50% (cinquenta por cento) até 3 (três) dias antes do evento e 30% (trinta por cento) restantes no dia do evento.
-    </p>
-    <p class="clausula-texto">
-      <span class="destaque">Parágrafo único:</span> Caso o número de convidados ultrapasse o contratado (${numConvidados}), será cobrado valor adicional por convidado excedente, conforme ajuste entre as partes.
+      A CONTRATADA fornecerá, para a prestação dos serviços, 1 (um) crepeiro e 1 (um) auxiliar.
     </p>
 
-    <p class="clausula-titulo">| Cláusula 6ª – Rescisão</p>
+    <p class="clausula-titulo">Cláusula 5ª – Valor e forma de pagamento</p>
     <p class="clausula-texto">
-      O presente contrato poderá ser rescindido por qualquer das partes, mediante comunicação formal por escrito, com antecedência mínima de 7 (sete) dias corridos da data prevista para o evento.
+      O serviço contratado será remunerado no valor total de R$ ${valorTotal} (${valorExtenso}), a ser pago da seguinte forma: 20% na assinatura do contrato, 50% até 3 (três) dias antes do evento e 30% no dia do evento.
     </p>
     <p class="clausula-texto">
-      <span class="destaque">§ 1º:</span> Se a rescisão partir da CONTRATADA, observados os prazos acima, será devolvido à CONTRATANTE 100% (cem por cento) de todos os valores eventualmente pagos.
+      <span class="destaque">Parágrafo primeiro:</span> O valor referente a 20% do total deverá ser pago na assinatura do contrato.
     </p>
     <p class="clausula-texto">
-      <span class="destaque">§ 2º:</span> Se a rescisão partir da CONTRATANTE dentro do prazo estabelecido, a CONTRATADA devolverá 80% (oitenta por cento) do valor pago até então, retendo 20% (vinte por cento) a título de custos administrativos e de reserva de data.
-    </p>
-    <p class="clausula-texto">
-      <span class="destaque">§ 3º:</span> Se a rescisão ocorrer fora do prazo mínimo de 7 (sete) dias corridos anteriores ao evento, os valores pagos não serão devolvidos.
+      <span class="destaque">Parágrafo segundo:</span> Caso exceda o número de convidados estipulado na Cláusula 1ª, será cobrado o valor que for acordado por convidado excedente.
     </p>
 
-    <p class="clausula-titulo">| Cláusula 7ª e 8ª – Limpeza, Consumo e Sobras</p>
+    <p class="clausula-titulo">Cláusula 6ª – Rescisão</p>
     <p class="clausula-texto">
-      A CONTRATADA se responsabiliza apenas pela limpeza dos resíduos diretamente decorrentes de seu serviço. Todo o cardápio e bebidas fornecidos poderão ser consumidos à vontade no local do evento.
+      O presente contrato poderá ser rescindido unilateralmente por qualquer uma das partes, desde que haja comunicação formal por escrito, com justificativa do motivo, com antecedência mínima de 7 (sete) dias corridos da data prevista para o evento.
     </p>
     <p class="clausula-texto">
-      A CONTRATADA considera margem de 10% (dez por cento) de convidados excedentes para fins de dimensionamento. As sobras de alimentos e bebidas não permanecerão com a CONTRATANTE, salvo ajuste específico entre as partes.
+      <span class="destaque">Parágrafo primeiro:</span> Caso a CONTRATADA rescinda o contrato dentro das regras e prazo estabelecidos, reembolsará integralmente a CONTRATANTE, devolvendo todo o montante pago até a data da rescisão.
+    </p>
+    <p class="clausula-texto">
+      <span class="destaque">Parágrafo segundo:</span> Caso a CONTRATANTE rescinda o contrato dentro das regras e prazo estabelecidos, a CONTRATADA devolverá 80% do montante pago até a data da rescisão.
+    </p>
+    <p class="clausula-texto">
+      <span class="destaque">Parágrafo terceiro:</span> Caso a CONTRATANTE rescinda o contrato fora do prazo mencionado, não haverá reembolso dos valores pagos.
     </p>
 
-    <p class="clausula-titulo">| Cláusula 10ª – Danos</p>
+    <p class="clausula-titulo">Cláusula 7ª – Limpeza</p>
     <p class="clausula-texto">
-      A CONTRATANTE responderá pelos danos causados pelos convidados ao material do buffet, sendo devidos, a título de indenização, os valores de referência: taça R$ ${precoTaça}; prato R$ ${precoPrato}; talher R$ ${precoTalher}, cobrados ao final do evento.
+      A CONTRATADA não se responsabiliza pela limpeza do local antes ou após o evento, retirando apenas os resíduos por ela provocados.
     </p>
 
-    <p class="clausula-titulo">| Cláusula 11ª – Foro</p>
+    <p class="clausula-titulo">Cláusula 8ª – Consumo e sobras</p>
     <p class="clausula-texto">
-      Para dirimir quaisquer controvérsias oriundas deste contrato, as partes elegem o foro da comarca de ${cidade}, com renúncia a qualquer outro, por mais privilegiado que seja.
+      Todo o cardápio e bebidas descritos serão fornecidos pela CONTRATADA, podendo ser consumidos à vontade no local do evento.
+    </p>
+    <p class="clausula-texto">
+      <span class="destaque">Parágrafo primeiro:</span> A CONTRATADA considera margem de 10% para convidados excedentes. As sobras dos suprimentos não poderão ficar com a CONTRATANTE, sob qualquer pretexto.
+    </p>
+    <p class="clausula-texto">
+      <span class="destaque">Parágrafo segundo:</span> A CONTRATADA não se responsabiliza pela insuficiência de alimentos e bebidas caso o número de convidados exceda a margem prevista.
+    </p>
+  `;
+
+  // COLUNA DIREITA – cláusulas 10 e 11 + fecho e assinaturas
+  const colunaDireita = `
+    <p class="clausula-titulo">Cláusula 10ª – Quebra ou perda de materiais</p>
+    <p class="clausula-texto">
+      A quebra ou perda de material do buffet por parte dos convidados será cobrada à parte, devendo a CONTRATANTE realizar o pagamento ao final do evento, nos seguintes valores: taça de refrigerante R$ ${precoTaça}; prato R$ ${precoPrato}; talher R$ ${precoTalher}.
+    </p>
+
+    <p class="clausula-titulo">Cláusula 11ª – Foro</p>
+    <p class="clausula-texto">
+      Para dirimir quaisquer controvérsias oriundas deste contrato, as partes elegem o foro da comarca de ${cidade}.
     </p>
 
     <div class="bloco-final">
       <p class="fecho">
-        E, por estarem assim justas e contratadas, firmam o presente instrumento em duas vias de igual teor.
+        Por estarem assim justos e contratados, firmam o presente instrumento em duas vias de igual teor.
       </p>
       <p class="fecho">
         ${cidade}, ${dataAssinatura}.
@@ -130,23 +148,30 @@ function gerarContrato() {
         <div>CONTRATANTE</div>
       </div>
       <div class="assinatura-bloco">
+        <div><strong>&nbsp;</strong></div>
+        <div>&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="assinaturas">
+      <div class="assinatura-bloco">
         <div class="assinatura-linha"></div>
         <div><strong>${nomeContratada}</strong></div>
-        <div>CONTRATADA</div>
+        <div>CONTRATADA – VOALÁ! BUFFET</div>
       </div>
     </div>
   `;
 
-  document.getElementById("conteudo").innerHTML = html;
+  document.getElementById("coluna-esquerda").innerHTML = colunaEsquerda;
+  document.getElementById("coluna-direita").innerHTML  = colunaDireita;
 }
 
 function gerarPDF() {
-  gerarContrato(); // garante conteúdo atualizado
+  gerarContrato();
 
   const elemento = document.getElementById("conteudo");
-
   const opcoes = {
-    margin:       [5, 5, 5, 5],
+    margin:       [0, 0, 0, 0],
     filename:     "contrato-voala.pdf",
     image:        { type: "jpeg", quality: 0.98 },
     html2canvas:  { scale: 3, useCORS: true },
