@@ -102,7 +102,7 @@ body {
   font-family: "Times New Roman", serif;
 
   /* AQUI você vai ajustar pra caber TUDO em 1 página */
-  font-size: 7.8pt;     /* diminui aqui: tente 7.5, 7.2, 7.0 */
+  font-size: 7pt;     /* diminui aqui: tente 7.5, 7.2, 7.0 */
 line-height: 1.22;    /* diminui aqui se precisar: tente 1.18, 1.15 */
 
   text-align: justify;
