@@ -4,64 +4,118 @@ function v(id) {
 
 function gerarContrato() {
   const tituloContrato  = v("tituloContrato");
+
   const nomeContratante = v("nomeContratante");
   const cpfContratante  = v("cpfContratante");
   const endContratante  = v("endContratante");
+
   const nomeContratada  = v("nomeContratada");
   const cpfContratada   = v("cpfContratada");
   const endContratada   = v("endContratada");
+
   const dataEvento      = v("dataEvento");
   const horaEvento      = v("horaEvento");
   const localEvento     = v("localEvento");
   const numConvidados   = v("numConvidados");
   const tipoServico     = v("tipoServico");
+
   const valorTotal      = v("valorTotal");
   const valorExtenso    = v("valorExtenso");
   const horaExtra       = v("horaExtra");
+
   const precoTaça       = v("precoTaça");
   const precoPrato      = v("precoPrato");
   const precoTalher     = v("precoTalher");
+
   const cidade          = v("cidade");
   const dataAssinatura  = v("dataAssinatura");
 
   const html = `
     <div class="titulo">CONTRATO DE PRESTAÇÃO DE SERVIÇO</div>
+    <div class="subtitulo">${tituloContrato}</div>
 
-    <p class="partes"><span class="destaque">CONTRATANTE:</span> ${nomeContratante}, CPF ${cpfContratante}. Endereço: ${endContratante}.</p>
-    <p class="partes"><span class="destaque">CONTRATADA:</span> VOALÁ! BUFFET, representada por ${nomeContratada}, CPF ${cpfContratada}, residente na ${endContratada}.</p>
-    <p class="partes">As partes acima identificadas têm entre si, justo e acertado, o presente Contrato de Prestação de Serviço, que se regerá pelas cláusulas seguintes:</p>
+    <p class="partes"><span class="destaque">CONTRATANTE:</span> ${nomeContratante}, CPF ${cpfContratante}, residente em ${endContratante}.</p>
+    <p class="partes"><span class="destaque">CONTRATADA:</span> VOALÁ! BUFFET, representada por ${nomeContratada}, CPF ${cpfContratada}, com endereço em ${endContratada}.</p>
 
-    <p class="clausula-titulo">| Cláusula 1ª: Objeto</p>
-    <p class="clausula-texto">Prestação de serviço de ${tipoServico} em ${dataEvento}, às ${horaEvento}, no endereço: ${localEvento}, para ${numConvidados}. O cardápio detalhado será definido entre as partes via proposta e mensagens eletrônicas, que passam a integrar este contrato.</p>
+    <p class="partes">
+      As partes acima identificadas firmam o presente Contrato de Prestação de Serviço, que se regerá pelas cláusulas seguintes.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 2ª: Responsabilidades</p>
-    <p class="clausula-texto">A CONTRATANTE fornecerá espaço adequado com pia, geladeira/freezer e fogão.</p>
-    <p class="clausula-texto"><span class="destaque">Parágrafo segundo:</span> Serviço por 4 horas. Antecedência de 1h para montagem.</p>
-    <p class="clausula-texto"><span class="destaque">Parágrafo terceiro:</span> Hora extra: R$ ${horaExtra} por funcionário, mediante acordo entre as partes.</p>
+    <p class="clausula-titulo">Cláusula 1ª – Objeto</p>
+    <p class="clausula-texto">
+      Prestação, pela CONTRATADA, de ${tipoServico}, em evento a ser realizado em ${dataEvento}, às ${horaEvento}, no(a) ${localEvento}, para aproximadamente ${numConvidados}.
+    </p>
+    <p class="clausula-texto">
+      Cardápio, bebidas e demais detalhes serão definidos em proposta e mensagens eletrônicas (WhatsApp, e-mail ou similares), que passam a integrar este contrato.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 3ª: Material</p>
-    <p class="clausula-texto">A CONTRATADA fornecerá material para servir (mesa principal, descartáveis e guardanapos). Não inclui mobiliário ou ornamentação.</p>
+    <p class="clausula-titulo">Cláusula 2ª – Local e condições</p>
+    <p class="clausula-texto">
+      A CONTRATANTE deverá disponibilizar espaço adequado, limpo e seguro, com acesso à energia elétrica e, quando necessário, pia e área para montagem e trabalho da equipe da CONTRATADA.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 4ª: Equipe</p>
-    <p class="clausula-texto">1 crepeiro, 1 auxiliar e, se necessário, 1 garçom (a critério da CONTRATADA).</p>
+    <p class="clausula-titulo">Cláusula 3ª – Materiais fornecidos</p>
+    <p class="clausula-texto">
+      A CONTRATADA fornecerá os equipamentos e utensílios básicos para execução do serviço.
+    </p>
+    <p class="clausula-texto">
+      Mobiliário, decoração, louças especiais, taças de vidro, toalhas diferenciadas e outros itens não citados nesta cláusula não estão incluídos, salvo ajuste específico entre as partes.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 5ª: Remuneração (R$ ${valorTotal})</p>
-    <p class="clausula-texto">Valor total de R$ ${valorTotal} (${valorExtenso}). Forma de pagamento: 20% na assinatura, 50% até 3 dias antes e 30% no dia do evento.</p>
+    <p class="clausula-titulo">Cláusula 4ª – Equipe</p>
+    <p class="clausula-texto">
+      A CONTRATADA disponibilizará equipe compatível com o porte do evento, composta por profissionais de produção e atendimento em número suficiente ao serviço contratado.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 6ª: Rescisão</p>
-    <p class="clausula-texto">Comunicação formal com 7 dias de antecedência. Reembolsos: 100% (se a CONTRATADA rescindir), 80% (se a CONTRATANTE rescindir dentro do prazo), e sem reembolso em caso de rescisão fora do prazo.</p>
+    <p class="clausula-titulo">Cláusula 5ª – Valor e forma de pagamento</p>
+    <p class="clausula-texto">
+      Pelo serviço contratado, a CONTRATANTE pagará à CONTRATADA o valor total de R$ ${valorTotal} (${valorExtenso}), nas condições de pagamento acordadas entre as partes, podendo incluir sinal de reserva de data e parcelas complementares até o dia do evento.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 7ª e 8ª: Limpeza e Consumo</p>
-    <p class="clausula-texto">Limpeza apenas dos resíduos do buffet. Consumo à vontade no local. Margem de 10% para convidados excedentes, sem direito às sobras.</p>
+    <p class="clausula-titulo">Cláusula 6ª – Hora extra</p>
+    <p class="clausula-texto">
+      A eventual prorrogação do horário dependerá de concordância da CONTRATADA e de disponibilidade de equipe, podendo ser cobrado o valor adicional de R$ ${horaExtra} por funcionário, por hora ou fração, a ser pago conforme ajuste entre as partes.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 10ª: Danos</p>
-    <p class="clausula-texto">Quebra de material: taça R$ ${precoTaça}; prato R$ ${precoPrato}; talher R$ ${precoTalher}, cobrados ao final do evento.</p>
+    <p class="clausula-titulo">Cláusula 7ª – Cancelamento e remarcação</p>
+    <p class="clausula-texto">
+      O cancelamento por iniciativa da CONTRATANTE deverá ser comunicado por escrito ou meio eletrônico. Valores pagos poderão ser retidos, parcial ou totalmente, a título de multa e ressarcimento de custos já assumidos, conforme combinado entre as partes.
+    </p>
+    <p class="clausula-texto">
+      A remarcação do evento dependerá de disponibilidade de agenda da CONTRATADA e poderá implicar atualização de valores.
+    </p>
 
-    <p class="clausula-titulo">| Cláusula 11ª: Foro</p>
-    <p class="clausula-texto">Fica eleito o foro da comarca de ${cidade}, para dirimir quaisquer controvérsias oriundas do presente contrato.</p>
+    <p class="clausula-titulo">Cláusula 8ª – Limpeza e conservação</p>
+    <p class="clausula-texto">
+      A CONTRATADA será responsável apenas pela limpeza dos materiais e equipamentos que utilizar, retirando os resíduos diretamente gerados pelo serviço, não se responsabilizando pela limpeza geral do local nem por danos causados por convidados.
+    </p>
 
-    <p class="fecho">Por estarem assim justos e contratados, firmam o presente instrumento em duas vias de igual teor.</p>
-    <p class="fecho">${cidade}, ${dataAssinatura}.</p>
+    <p class="clausula-titulo">Cláusula 9ª – Consumo e sobras</p>
+    <p class="clausula-texto">
+      O consumo de alimentos e bebidas limita-se às quantidades contratadas. O tratamento de eventuais sobras seguirá a política interna da CONTRATADA e o que for acordado entre as partes, não havendo obrigação de destinação de excedentes à CONTRATANTE.
+    </p>
+
+    <p class="clausula-titulo">Cláusula 10ª – Danos a materiais</p>
+    <p class="clausula-texto">
+      A CONTRATANTE responderá por danos causados pelos convidados a equipamentos, utensílios e materiais da CONTRATADA, devendo arcar com os custos de reposição ou reparo. A título de referência, poderão ser utilizados os valores: taça R$ ${precoTaça}; prato R$ ${precoPrato}; talher R$ ${precoTalher}, sujeitos a atualização.
+    </p>
+
+    <p class="clausula-titulo">Cláusula 11ª – Comunicações eletrônicas</p>
+    <p class="clausula-texto">
+      As partes reconhecem como válidas, para fins de complementação e prova deste contrato, as comunicações realizadas por aplicativos de mensagem, e-mail ou outros meios eletrônicos utilizados entre CONTRATANTE e CONTRATADA.
+    </p>
+
+    <p class="clausula-titulo">Cláusula 12ª – Foro</p>
+    <p class="clausula-texto">
+      Para dirimir eventuais controvérsias decorrentes deste contrato, as partes elegem o foro da comarca de ${cidade}, renunciando a qualquer outro, por mais privilegiado que seja.
+    </p>
+
+    <p class="fecho">
+      E, por estarem assim justas e contratadas, firmam o presente instrumento em duas vias de igual teor.
+    </p>
+    <p class="fecho">
+      ${cidade}, ${dataAssinatura}.
+    </p>
 
     <div class="assinaturas">
       <div class="assinatura-bloco">
@@ -72,7 +126,7 @@ function gerarContrato() {
       <div class="assinatura-bloco">
         <div class="assinatura-linha"></div>
         <div><strong>${nomeContratada}</strong></div>
-        <div>CONTRATADA</div>
+        <div>CONTRATADA – VOALÁ! BUFFET</div>
       </div>
     </div>
   `;
@@ -80,100 +134,18 @@ function gerarContrato() {
   document.getElementById("conteudo").innerHTML = html;
 }
 
+/* Continua usando html2pdf, para baixar direto */
 function gerarPDF() {
-  gerarContrato();
+  gerarContrato(); // garante que o conteúdo está atualizado
 
-  // Abre janela de impressão — o que você vê é o que sai no PDF
-  const conteudo = document.getElementById("conteudo").innerHTML;
-  const janela = window.open("", "_blank");
-  janela.document.write(`
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
-      <meta charset="UTF-8"/>
-      <title>Contrato VOALÁ</title>
-      <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+  const elemento = document.getElementById("conteudo");
+  const opcoes = {
+    margin:       [0, 0, 0, 0],
+    filename:     "contrato-voala.pdf",
+    image:        { type: "jpeg", quality: 0.98 },
+    html2canvas:  { scale: 3, useCORS: true },
+    jsPDF:        { unit: "mm", format: "a4", orientation: "portrait" }
+  };
 
-        @page {
-          size: A4;
-          margin: 0;
-        }
-
-        body {
-          width: 210mm;
-          height: 297mm;
-          margin: 0;
-          padding: 0;
-          background: #fff;
-          font-family: "Times New Roman", serif;
-        }
-
-        #pagina {
-          width: 210mm;
-          height: 297mm;
-          padding: 14mm 20mm 12mm 20mm;
-          overflow: hidden;
-
-          /* FONTE – o que você muda aqui sai no PDF */
-          font-size: 9pt;
-          line-height: 1.25;
-
-          text-align: justify;
-          color: #000;
-        }
-
-        .titulo {
-          text-align: center;
-          font-weight: bold;
-          font-size: 11pt;
-          margin-bottom: 6px;
-        }
-
-        .partes { margin-bottom: 4px; }
-
-        .clausula-titulo {
-          font-weight: bold;
-          margin-top: 6px;
-          margin-bottom: 1px;
-        }
-
-        .clausula-texto { margin-bottom: 3px; }
-
-        .destaque { font-weight: bold; }
-
-        .fecho { margin-top: 8px; }
-
-        .assinaturas {
-          margin-top: 20px;
-          display: flex;
-          justify-content: space-between;
-          gap: 30px;
-        }
-
-        .assinatura-bloco {
-          flex: 1;
-          text-align: center;
-          font-size: 9pt;
-        }
-
-        .assinatura-linha {
-          border-top: 1px solid #000;
-          margin-top: 22px;
-          margin-bottom: 3px;
-        }
-      </style>
-    </head>
-    <body>
-      <div id="pagina">${conteudo}</div>
-      <script>
-        window.onload = function() {
-          window.print();
-          window.onafterprint = function() { window.close(); };
-        };
-      <\/script>
-    </body>
-    </html>
-  `);
-  janela.document.close();
+  html2pdf().set(opcoes).from(elemento).save();
 }
