@@ -13,7 +13,7 @@
     <h2>Dados do Contrato</h2>
 
     <label>Título / Nome do Contrato</label>
-    <input id="tituloContrato" type="text" value="Contrato Jessica Coelho Pacheco" />
+    <input id="tituloContrato" type="text" value="Contrato de Prestação de Serviço de Buffet" />
 
     <label>Nome do(a) Contratante</label>
     <input id="nomeContratante" type="text" value="Jessica Coelho Pacheco" />
@@ -47,19 +47,8 @@
     <label>Número de Convidados</label>
     <input id="numConvidados" type="text" value="150 adultos" />
 
-    <label>Descrição do Serviço</label>
-    <input id="descricaoServico" type="text" value="CREPE FRANCÊS" />
-
-    <label>Tipo de Cardápio</label>
-    <input id="tipoCardapio" type="text" value="Executivo" />
-
-    <label>Cardápio Salgado</label>
-    <input id="cardapioSalgado" type="text"
-           value="Muçarela, Peito de peru e queijo, Frango cremoso, Calabresa acebolada" />
-
-    <label>Cardápio Doce</label>
-    <input id="cardapioDoce" type="text"
-           value="Banana com doce de leite, Nutella com morango, Ovomaltine, Chocolate ao leite com confete" />
+    <label>Tipo de Serviço</label>
+    <input id="tipoServico" type="text" value="Buffet de crepe francês" />
 
     <label>Valor Total (R$)</label>
     <input id="valorTotal" type="text" value="3.700,00" />
@@ -90,13 +79,10 @@
     <button onclick="gerarPDF()">Gerar PDF</button>
   </div>
 
-  <!-- PREVIEW DO CONTRATO -->
+  <!-- PREVIEW DO CONTRATO (UMA COLUNA) -->
   <div id="contrato">
     <div id="conteudo">
-      <div id="colunas">
-        <div class="coluna" id="coluna-esquerda"></div>
-        <div class="coluna" id="coluna-direita"></div>
-      </div>
+      <!-- O JS injeta o contrato aqui -->
     </div>
   </div>
 
