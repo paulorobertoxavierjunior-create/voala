@@ -91,90 +91,78 @@ body {
   overflow: auto;
 }
 
-/* Folha A4, centralizada */
+/* Folha A4 travada em UMA página */
 #conteudo {
   width: 210mm;
-  height: 297mm;                /* 1 página A4 */
+  height: 297mm;                  /* 1 página A4 */
   background: #ffffff;
   color: #111111;
-  padding: 18mm 18mm 18mm 18mm;  /* margens simétricas */
+  padding: 15mm 22mm 15mm 22mm;   /* margens internas (você pode ajustar) */
   box-shadow: 0 0 22px rgba(0,0,0,0.5);
-  font-size: 8pt;                /* fonte menor pra caber em 1 página */
-  line-height: 1.4;
-}
+  font-family: "Times New Roman", serif;
 
-/* Container das duas colunas */
-#colunas {
-  display: flex;
-  height: 100%;
-  gap: 8mm;
-}
+  /* AQUI você vai ajustar pra caber TUDO em 1 página */
+  font-size: 9pt;                 /* teste: mude para 8.5pt, 8pt, etc. */
+  line-height: 1.3;               /* pode reduzir levemente se precisar */
 
-/* Cada coluna */
-.coluna {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   text-align: justify;
+  overflow: hidden;               /* corta qualquer coisa que passar da página */
 }
 
-/* Título e subtítulo (saem na coluna esquerda) */
-.titulo {
+/* Título e subtítulo */
+#conteudo .titulo {
   text-align: center;
   font-weight: bold;
-  font-size: 9pt;
-  margin-bottom: 3px;
-}
-
-.subtitulo {
-  text-align: center;
-  font-size: 7.5pt;
-  margin-bottom: 7px;
-}
-
-.partes {
-  margin-bottom: 3px;
-}
-
-.clausula-titulo {
-  font-weight: bold;
-  margin-top: 8px;
-  margin-bottom: 2px;
-}
-
-.clausula-texto {
+  font-size: 11pt;
   margin-bottom: 4px;
 }
 
-.destaque {
+#conteudo .subtitulo {
+  text-align: center;
+  font-size: 9pt;
+  margin-bottom: 10px;
+}
+
+/* Partes e cláusulas */
+#conteudo .partes {
+  margin-bottom: 4px;
+}
+
+#conteudo .clausula-titulo {
+  font-weight: bold;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+#conteudo .clausula-texto {
+  margin-bottom: 3px;
+}
+
+#conteudo .destaque {
   font-weight: bold;
 }
 
-/* bloco final na coluna direita */
-.bloco-final {
-  margin-top: 10px;
+/* Fecho e data */
+#conteudo .fecho {
+  margin-top: 8px;
 }
 
-.fecho {
-  margin-top: 4px;
-}
-
-/* Assinaturas na coluna direita */
-.assinaturas {
-  margin-top: 16px;
+/* Assinaturas */
+#conteudo .assinaturas {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
-  gap: 8mm;
+  gap: 30px;
 }
 
 .assinatura-bloco {
   flex: 1;
   text-align: center;
-  font-size: 7.5pt;
+  font-size: 9pt;
 }
 
 .assinatura-linha {
   border-top: 1px solid #000;
   margin-bottom: 3px;
-  margin-top: 18px;
+  margin-top: 20px;
 }
