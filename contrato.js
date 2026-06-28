@@ -96,7 +96,7 @@ function gerarPDF() {
 
   const opcoes = {
     margin:      [0, 0, 0, 0],
-    filename:    "contrato-voala.pdf",
+    filename:    "Contrato_Voalá_Buffet.pdf",
     image:       { type: "jpeg", quality: 0.98 },
     html2canvas: { scale: 3, useCORS: true },
     jsPDF:       { unit: "mm", format: "a4", orientation: "portrait" }
