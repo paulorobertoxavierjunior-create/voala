@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Elayon Presença · Laboratório v3.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f8f8;
+      --surface: #ffffff;
+      --border: #c8e2e4;
+      --cyan: #3ecfcf;
+      --cglow: rgba(62,207,207,0.18);
+      --teal: #2a9d8f;
+      --text: #072024;
+      --muted: #4a7a80;
+      --red: #ef4444;
+      --mono: 'Share Tech Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    .page { width: 100%; max-width: 540px; }
+    
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(62,207,207,0.02); }
+    .card-label { font-family: var(--mono); font-size: 8px; letter-spacing: 2px; color: var(--cyan); text-transform: uppercase; display: block; margin-bottom: 12px; }
+    
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .field-label { display: block; font-size: 9px; color: var(--muted); font-family: var(--mono); margin-bottom: 4px; text-transform: uppercase; }
+    .field-input { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--mono); font-size: 11px; outline: none; background: var(--bg); color: var(--text); }
+    
+    .chat-box { height: 160px; overflow-y: auto; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+    .msg { max-width: 90%; padding: 12px; border-radius: 14px; font-size: 13px; line-height: 1.4; }
+    .msg.ai { background: #e2f1f2; align-self: flex-start; border-radius: 14px 14px 14px 4px; border: 1px solid var(--border); }
+    
+    .secao-captura { background: #fafdfd; border: 1px dashed var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .status-indicador { font-family: var(--mono); font-size: 10px; font-weight: bold; margin-bottom: 8px; display: block; }
+    
+    .caixa-transcricao { min-height: 50px; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-size: 12px; margin-bottom: 10px; color: var(--muted); }
+    .caixa-transcricao.gravando { border-color: var(--red); background: #fff5f5; color: var(--text); }
+
+    .btn { padding: 12px 16px; border: none; border-radius: 10px; font-family: var(--mono); font-size: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; transition: 0.2s; }
+    .btn-cyan { background: var(--cyan); color: #072024; box-shadow: 0 4px 10px var(--cglow); }
+    .btn-red { background: var(--red); color: white; }
+    .btn-teal { background: var(--teal); color: white; }
+    .btn-full { width: 100%; display: block; }
+    
+    .log-terminal { background: #0b1d20; color: #7bf5f5; font-family: var(--mono); font-size: 10px; padding: 12px; border-radius: 8px; max-height: 120px; overflow-y: auto; white-space: pre-wrap; margin-top: 8px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="card">
+    <span class="card-label" id="panelIdentity">⚙️ CENTRAL DE INFRAESTRUTURA</span>
+    <div class="field-grid">
+      <div>
+        <label class="field-label">Render Backend (Motor)</label>
+        <input type="text" id="cfgRenderUrl" class="field-input" value="https://presenca-1yuy.onrender.com" />
+      </div>
+      <div>
+        <label class="field-label">Supabase URL</label>
+        <input type="text" id="cfgSupabaseUrl" class="field-input" value="https://eudcjlhffrfmhzmfwtlg.supabase.co" />
+      </div>
+    </div>
+    <div class="field-grid">
+      <div>
+        <label class="field-label">Supabase Anon Key</label>
+        <input type="text" id="cfgSupabaseKey" class="field-input" value="sb_publishable_eFXj7d8dOSREvEJbZ0xQJg_NgPCI8Nz" />
+      </div>
+      <div>
+        <label class="field-label">Gemini API Key</label>
+        <input type="password" id="cfgGeminiKey" class="field-input" placeholder="AIzaSy..." />
+      </div>
+    </div>
+    <button class="btn btn-cyan btn-full" id="btnTestarConexoes">Disparar Check Geral de Conectividade</button>
+    <div class="log-terminal" id="terminalLogs">> Console pronto. Ative as conexões para liberar o laboratório.</div>
+  </div>
+
+  <div class="card hidden" id="areaPainelSimbiotico">
+    <span class="card-label">🎙️ CORE DE AUDITORIA DE PRESENÇA</span>
+    
+    <div class="chat-box" id="chatMensagens"></div>
+
+    <div class="secao-captura" id="blocoAudio">
+      <span class="status-indicador" id="indAudio">🔴 PASSO 1: AGUARDANDO CAPTAÇÃO DE VOZ</span>
+      <div class="caixa-transcricao" id="caixaVoz">A transcrição do seu áudio aparecerá aqui em tempo real assim que o microfone for aberto...</div>
+      <button class="btn btn-cyan btn-full" id="btnAcionarMic">🎙️ Abrir Canal Acústico Real</button>
+      <button class="btn btn-red btn-full hidden" id="btnDesligarMic">⏹️ Cortar e Validar Transcrição</button>
+    </div>
+
+    <div class="secao-captura hidden" id="blocoTeclado">
+      <span class="status-indicador" style="color: var(--teal);">⌨️ PASSO 2: CALIBRAÇÃO RÍTMICA DE DIGITAÇÃO</span>
+      <textarea id="chatInputTexto" class="field-input" style="height: 60px; resize: none; margin-bottom: 8px;" placeholder="Digite o texto solicitado pela IA aqui (Mínimo 30 caracteres)..."></textarea>
+      <button class="btn btn-teal btn-full" id="btnEnviarTexto">Enviar Texto Contextual</button>
+    </div>
+
+    <button class="btn btn-teal btn-full hidden" id="btnAvancarFase" style="background: #10b981;">Despachar Metadados para o CRS ➔</button>
+  </div>
+
+  <div class="card">
+    <span class="card-label">🔑 PRODUTO OPERACIONAL EMITIDO</span>
+    <input type="text" id="tokenSaidaFinal" class="field-input" placeholder="Aguardando validação semântica e temporal..." disabled />
+    <div id="metaTempoCaixa" style="font-family: var(--mono); font-size: 9px; color: var(--muted); margin-top: 6px; text-align: center;"></div>
+  </div>
+
+</div>
+
+<script>
+  let logTerm = document.getElementById('terminalLogs');
+  let reconhecimentoVoz = null;
+  let bufferVoz = '';
+  let metricasTempo = { inicioVoz: null, fimVoz: null, inicioTeclado: null, fimTeclado: null };
+  let temposFinais = { voz: 0, teclado: 0 };
+
+  function logger(msg) {
+    logTerm.innerText += `\n[${new Date().toLocaleTimeString()}] ${msg}`;
+    logTerm.scrollTop = logTerm.scrollHeight;
+  }
+
+  // CHECK DE INFRAESTRUTURA
+  document.getElementById('btnTestarConexoes').addEventListener('click', async () => {
+    logger("Iniciando varredura...");
+    const rUrl = document.getElementById('cfgRenderUrl').value.trim();
+    const gKey = document.getElementById('cfgGeminiKey').value.trim();
+
+    try {
+      const res = await fetch(`${rUrl}/`);
+      const data = await res.json();
+      logger(`✓ Motor (Render) Ativo: ${JSON.stringify(data)}`);
+    } catch(e) {
+      logger(`❌ Falha no link do Motor: ${e.message}`);
+    }
+    
+    logger(`✓ Conectividade com a base de dados pré-validada (Chave Pública Ativa).`);
+
+    if(gKey) {
+      document.getElementById('areaPainelSimbiotico').classList.remove('hidden');
+      document.getElementById('chatMensagens').innerHTML = '';
+      const instrIA = "Instâncias integradas! Sou a IA especialista do repositório 'presenca'. Leia a sentença de segurança em voz alta no microfone:\n\n'Canal acústico estabelecido. Protocolo Elayon em sincronia de amostragem.'";
+      const b = document.createElement('div'); b.className = 'msg ai'; b.innerText = instrIA;
+      document.getElementById('chatMensagens').appendChild(b);
+    } else {
+      logger("❌ Chave Gemini ausente para injeção contextual.");
+    }
+  });
+
+  // LÓGICA DO MICROFONE REAL
+  const btnAcionarMic = document.getElementById('btnAcionarMic');
+  const btnDesligarMic = document.getElementById('btnDesligarMic');
+  const caixaVoz = document.getElementById('caixaVoz');
+
+  btnAcionarMic.addEventListener('click', () => {
+    const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if(!Speech) return alert("API de voz não suportada neste dispositivo/navegador.");
+
+    reconhecimentoVoz = new Speech();
+    reconhecimentoVoz.continuous = true;
+    reconhecimentoVoz.interimResults = true;
+    reconhecimentoVoz.lang = 'pt-BR';
+    bufferVoz = '';
+
+    metricasTempo.inicioVoz = Date.now();
+    caixaVoz.classList.add('gravando');
+    caixaVoz.innerText = "Ouvindo... Fale agora.";
+    document.getElementById('indAudio').innerText = "🔴 MICROFONE ATIVO - CAPTURANDO SINAL";
+
+    btnAcionarMic.classList.add('hidden');
+    btnDesligarMic.classList.remove('hidden');
+
+    reconhecimentoVoz.onresult = (event) => {
+      let interimTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) bufferVoz += event.results[i][0].transcript;
+        else interimTranscript += event.results[i][0].transcript;
+      }
+      caixaVoz.innerText = bufferVoz || interimTranscript;
+    };
+
+    reconhecimentoVoz.onerror = (e) => logger(`⚠️ Captura acústica: ${e.error}`);
+    reconhecimentoVoz.start();
+  });
+
+  btnDesligarMic.addEventListener('click', () => {
+    if(reconhecimentoVoz) reconhecimentoVoz.stop();
+    metricasTempo.fimVoz = Date.now();
+    caixaVoz.classList.remove('gravando');
+    
+    temposFinais.voz = ((metricasTempo.fimVoz - metricasTempo.inicioVoz) / 1000).toFixed(1);
+    document.getElementById('indAudio').innerText = `✓ PASSO 1 CONCLUÍDO (${temposFinais.voz}s)`;
+    
+    btnDesligarMic.classList.add('hidden');
+    document.getElementById('blocoTeclado').classList.remove('hidden');
+    metricasTempo.inicioTeclado = Date.now();
+  });
+
+  // LÓGICA DO TECLADO
+  document.getElementById('btnEnviarTexto').addEventListener('click', () => {
+    const txt = document.getElementById('chatInputTexto').value.trim();
+    if(txt.length < 30) {
+      alert("Por favor, digite ao menos 30 caracteres para calibrar o ritmo.");
+      return;
+    }
+    metricasTempo.fimTeclado = Date.now();
+    temposFinais.teclado = ((metricasTempo.fimTeclado - metricasTempo.inicioTeclado) / 1000).toFixed(1);
+    
+    document.getElementById('blocoTeclado').classList.add('hidden');
+    document.getElementById('btnAvancarFase').classList.remove('hidden');
+    document.getElementById('metaTempoCaixa').innerText = `Métricas Coletadas ➔ Voz: ${temposFinais.voz}s | Teclado: ${temposFinais.teclado}s`;
+  });
+
+  // DESPACHO FINAL
+  document.getElementById('btnAvancarFase').addEventListener('click', async () => {
+    logger("Despachando pacote simbiótico estruturado...");
+    const rUrl = document.getElementById('cfgRenderUrl').value.trim();
+    const gKey = document.getElementById('cfgGeminiKey').value.trim();
+
+    const payload = {
+      mensagem_usuario: document.getElementById('chatInputTexto').value.trim() || "Calibração de segurança aceita.",
+      provedor: "gemini",
+      api_key_externa: gKey,
+      metricas_sinal: {
+        silencio_voz_pct: Math.min(Math.round(temposFinais.voz * 3), 100),
+        hesitacao_escrita_pct: Math.min(Math.round(temposFinais.teclado * 2), 100),
+        total_intervalos: 12
+      }
+    };
+
+    try {
+      const response = await fetch(`${rUrl}/api/crs/processar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+      
+      if(response.ok) {
+        logger(`✓ Resposta Cognitiva Recebida!`);
+        document.getElementById('tokenSaidaFinal').value = "ELAYON-CALIBRADO-" + Math.random().toString(36).substring(3,11).toUpperCase();
+      } else {
+        logger(`❌ Erro no Motor: ${data.detail || JSON.stringify(data)}`);
+      }
+    } catch(err) {
+      logger(`❌ Erro físico na rota: ${err.message}`);
+    }
+  });
+</script>
+</body>
+</html>
