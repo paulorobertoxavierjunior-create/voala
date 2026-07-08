@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voalá! - Simulador de Orçamento Futurista</title>
-    <!-- Google Fonts para dar o tom moderno/futurista -->
+    <title>Voalá! Buffet - Simulador de Orçamento</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -64,8 +63,9 @@
         .orientacao {
             text-align: center;
             font-size: 1.1rem;
-            color: #666;
+            color: #555;
             margin-bottom: 25px;
+            font-weight: 500;
         }
 
         .form-group {
@@ -192,13 +192,13 @@
         <div class="logo-placeholder">[ SUA LOGO AQUI ]</div>
     </div>
 
-    <h1>VOALÁ! BUFFET</h1>
-    <p class="orientacao">Monte sua experiência rítmica e calcule o seu orçamento em tempo real.</p>
+    <h1>Voalá! Buffet</h1>
+    <p class="orientacao">Olá! Preencha os campos abaixo e veja seu orçamento na hora.</p>
 
     <form id="orcamentoForm" onsubmit="event.preventDefault(); calcularOrcamento();">
         <div class="form-group">
             <label for="nome">Nome do Solicitante *</label>
-            <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+            <input type="text" id="nome" placeholder="Como podemos te chamar?" required>
         </div>
 
         <div class="grid-3">
@@ -211,7 +211,7 @@
                 <input type="time" id="horario" required>
             </div>
             <div class="form-group">
-                <label for="cardapio">Cardápio *</label>
+                <label for="cardapio">Cardápio desejado *</label>
                 <select id="cardapio" required onchange="calcularOrcamento()">
                     <option value="crepe_exec1">Crepes Franceses - Executivo 1</option>
                     <option value="crepe_exec2">Crepes Franceses - Executivo 2</option>
@@ -230,36 +230,38 @@
             </div>
         </div>
 
+        <p class="orientacao">Agora, informe a quantidade de convidados para calcular as integrais:</p>
+
         <div class="grid-3">
             <div class="form-group">
                 <label for="adultos">Adultos</label>
                 <input type="number" id="adultos" value="0" min="0" oninput="calcularOrcamento()">
             </div>
             <div class="form-group">
-                <label for="criancas_7_11">Crianças (7 a 11 anos)</label>
+                <label for="criancas_7_11">De 7 a 11 anos</label>
                 <input type="number" id="criancas_7_11" value="0" min="0" oninput="calcularOrcamento()">
             </div>
             <div class="form-group">
-                <label for="criancas_menores_7">Crianças (< 7 anos)</label>
+                <label for="criancas_menores_7">Menores de 7 anos</label>
                 <input type="number" id="criancas_menores_7" value="0" min="0" oninput="calcularOrcamento()">
             </div>
         </div>
 
         <div class="info-box">
-            <strong>Incluso em todos os pacotes:</strong><br>
-            🍽️ <strong>Louças:</strong> talheres, taças e pratos.<br>
-            🥤 <strong>Bebidas:</strong> Coca-cola, Coca-zero, Guaraná Antártica, sucos integrais (laranja e uva).<br>
-            🧑‍🍳 <strong>Serviços:</strong> churrasqueiros, cozinheiros, chapeiros, copeiros, garçons e auxiliares (quantidade necessária).<br>
-            ⚠️ <em>Restrição alimentar? Informe via WhatsApp para avaliação.</em>
+            <strong>O que já está incluso no seu pacote:</strong><br>
+            🍽️ <strong>Louças completas:</strong> talheres, taças e pratos.<br>
+            🥤 <strong>Bebidas de linha:</strong> Coca-cola, Coca-zero, Guaraná Antártica e sucos integrais (laranja/uva).<br>
+            🧑‍🍳 <strong>Equipe de Serviço:</strong> profissionais necessários (churrasqueiros, cozinheiros, garçons, copeiros).<br>
+            ⚠️ <em>Para restrições alimentares ou sucos naturais, clique no botão do WhatsApp ao final.</em>
         </div>
 
-        <button type="button" class="btn" onclick="calcularOrcamento()">Atualizar Visualização</button>
+        <button type="button" class="btn" onclick="calcularOrcamento()">Visualizar orçamento</button>
     </form>
 
     <div id="resultado" class="resultado-box">
-        <h3>ORÇAMENTO FUTURISTA ELAION</h3>
+        <h3>ORÇAMENTO SOLICITADO</h3>
         <div class="resultado-item">
-            <span>Solicitante:</span>
+            <span>Cliente:</span>
             <strong id="resNome">-</strong>
         </div>
         <div class="resultado-item">
@@ -278,21 +280,20 @@
             <span>Valor por Integral:</span>
             <strong id="resValorUnitario">-</strong>
         </div>
-        <div class="resultado-item total-item">
-            <span>VALOR TOTAL TOTAL:</span>
+        <div class="total-item resultado-item">
+            <span>VALOR TOTAL VALOR:</span>
             <strong id="resTotal">-</strong>
         </div>
 
         <div style="margin-top: 20px;">
             <a id="whatsappLink" href="#" target="_blank" class="whatsapp-link">
-                <button class="btn btn-whatsapp">Confirmar Pedido e Verificar Agenda 🚀</button>
+                <button class="btn btn-whatsapp">Confirmar pedido e verificar agenda</button>
             </a>
         </div>
     </div>
 </div>
 
 <script>
-    // Banco de dados de Preços estruturado por faixas de Integrais
     const tabelaPrecos = {
         faixa_20_30: { crepe_exec1: 120, crepe_exec2: 125, crepe_prem: 130, pizza_exec1: 125, pizza_exec2: 130, pizza_prem: 135, infantil: 110, infantil_massas: 125, rodizio_pizza: 110, rodizio_massas: 125, churrasco: 120, feijoada: 95 },
         faixa_30_40: { crepe_exec1: 100, crepe_exec2: 110, crepe_prem: 120, pizza_exec1: 110, pizza_exec2: 120, pizza_prem: 130, infantil: 100, infantil_massas: 110, rodizio_pizza: 100, rodizio_massas: 110, churrasco: 100, feijoada: 90 },
@@ -310,7 +311,6 @@
         const c7_11 = parseInt(document.getElementById('criancas_7_11').value) || 0;
         const cMenor7 = parseInt(document.getElementById('criancas_menores_7').value) || 0;
 
-        // Regra de Cálculo de Integrais
         const integralAdultos = adultos;
         const integralC7_11 = Math.floor(c7_11 / 2);
         const integralCMenor7 = cMenor7 >= 6 ? Math.floor(cMenor7 / 6) : 0;
@@ -319,14 +319,11 @@
         const totalConvidados = adultos + c7_11 + cMenor7;
         const totalCriancasGeral = c7_11 + cMenor7;
 
-        // Determinação do preço unitário baseado nas faixas de Integrais
         let precoUnitario = 0;
         let precisaAvaliar = false;
         let faixa = "";
 
-        if (cardapio === "personalizado") {
-            precisaAvaliar = true;
-        } else if (totalIntegrais < 20) {
+        if (cardapio === "personalizado" || totalIntegrais < 20) {
             precisaAvaliar = true;
         } else if (totalIntegrais >= 20 && totalIntegrais < 30) {
             faixa = "faixa_20_30";
@@ -344,9 +341,8 @@
 
         const valorTotal = totalIntegrais * precoUnitario;
 
-        // Renderização do painel de resultados
         document.getElementById('resNome').innerText = nome;
-        document.getElementById('resDataHora').innerText = (data && horario) ? `${data.split('-').reverse().join('/')} às ${horario}` : "Defina data e horário";
+        document.getElementById('resDataHora').innerText = (data && horario) ? `${data.split('-').reverse().join('/')} às ${horario}` : "Preencha a data e horário acima";
         document.getElementById('resConvidados').innerText = `${totalConvidados} pessoas`;
         document.getElementById('resIntegrais').innerText = `${totalIntegrais} integrais (${adultos} adultos e ${totalCriancasGeral} crianças)`;
         
@@ -358,7 +354,6 @@
             document.getElementById('resTotal').innerText = `R$ ${valorTotal},00`;
         }
 
-        // Geração do texto formatado para o WhatsApp
         const nomeCardapioSelect = document.getElementById('cardapio').options[document.getElementById('cardapio').selectedIndex].text;
         let msgWhatsapp = `Gostaria de confirmar meu pedido.%0A%0A`;
         msgWhatsapp += `*Solicitante:* ${nome}%0A`;
@@ -366,7 +361,7 @@
         msgWhatsapp += `*Cardápio:* ${nomeCardapioSelect}%0A`;
         msgWhatsapp += `*Convidados:* ${totalConvidados} (Adultos: ${adultos}, 7-11a: ${c7_11}, <7a: ${cMenor7})%0A`;
         msgWhatsapp += `*Integrais Calculadas:* ${totalIntegrais} integrais (${adultos} adultos e ${totalCriancasGeral} crianças)%0A`;
-        msgWhatsapp += precisaAvaliar ? `*Valor:* A definir via avaliação manual.` : `*Valor Total:* R$ ${valorTotal},00`;
+        msgWhatsapp += precisaAvaliar ? `*Valor:* A definir via avaliação manual por menos de 20 integrais ou menu personalizado.` : `*Valor Total:* R$ ${valorTotal},00`;
 
         document.getElementById('whatsappLink').href = `https://wa.me/5592988472009?text=${msgWhatsapp}`;
         document.getElementById('resultado').style.display = 'block';
