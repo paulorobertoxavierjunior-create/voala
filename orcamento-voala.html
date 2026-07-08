@@ -2,13 +2,9 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8"> 
-    <meta name="viewport"  content="width=device-width, initial-scale=1.0">
-    <title>Voalá! Buffet - Simulador de Orçamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voalá! Buffet - Simulador de Orçamento Inteligente</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    
-    <!-- Biblioteca necessária para gerar o PDF no Mobile e Desktop -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <style>
         :root {
             --orange-primary: #FF6600;
@@ -165,16 +161,16 @@
         .btn:hover {
             background: var(--orange-neon);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 153, 51, 0.4);
         }
 
-        .btn-whatsapp {
-            background: #25D366;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        .btn-ia {
+            background: #8E24AA;
+            box-shadow: 0 4px 15px rgba(142, 36, 170, 0.3);
+            margin-top: 15px;
         }
-        .btn-whatsapp:hover {
-            background: #20BA5A;
-            box-shadow: 0 6px 20px rgba(32, 186, 90, 0.4);
+        .btn-ia:hover {
+            background: #AB47BC;
+            box-shadow: 0 6px 20px rgba(171, 71, 188, 0.4);
         }
 
         .resultado-box {
@@ -204,40 +200,6 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
-        }
-
-        .cardapio-titulo-bloco {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--orange-primary);
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            border-bottom: 1px solid rgba(255, 102, 0, 0.1);
-            padding-bottom: 4px;
-        }
-
-        .resultado-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-size: 1.05rem;
-        }
-
-        .total-item {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            color: var(--orange-primary);
-            font-weight: bold;
-            margin-top: 5px;
-            padding-top: 5px;
-            border-top: 1px dashed rgba(255, 102, 0, 0.2);
-        }
-
-        /* CONTAINER OCULTO PARA MOUNTAIN DO PDF CANVA */
-        #propostaPdfTemplate {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-            width: 794px; /* Largura padrão de folha A4 em pixels aproximados */
         }
     </style>
 </head>
@@ -294,13 +256,9 @@
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec1" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 1</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec2" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 2</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_prem" onchange="calcularOrcamento()"> Crepes + Pizza - Premium</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil" onchange="checkboxUsoUnico(this); calcularOrcamento()"> Buffet Infantil</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil_massas" onchange="checkboxUsoUnico(this); calcularOrcamento()"> Buffet Infantil + 2 Massas</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="rodizio_pizza" onchange="checkboxUsoUnico(this); calcularOrcamento()"> Rodízio de Pizzas</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="rodizio_massas" onchange="checkboxUsoUnico(this); calcularOrcamento()"> Rodízio de Pizzas + 2 Massas</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="churrasco" onchange="checkboxUsoUnico(this); calcularOrcamento()"> Churrasco do Chefe</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="feijoada" onchange="checkboxUsoUnico(this); calcularOrcamento()"> Feijoada do Voalá!</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="personalizado" onchange="checkboxUsoUnico(this); calcularOrcamento()"> Cardápio Personalizado (A definir via WhatsApp)</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil" onchange="calcularOrcamento()"> Buffet Infantil</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="churrasco" onchange="calcularOrcamento()"> Churrasco do Chefe</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="feijoada" onchange="calcularOrcamento()"> Feijoada do Voalá!</label>
             </div>
         </div>
 
@@ -309,18 +267,18 @@
             🍽️ <strong>Louças completas:</strong> talheres, taças e pratos.<br>
             🥤 <strong>Bebidas de linha:</strong> Coca-cola, Coca-zero, Guaraná Antártica e sucos integrais (laranja/uva).<br>
             🧑‍🍳 <strong>Equipe de Serviço:</strong> profissionais necessários (churrasqueiros, cozinheiros, garçons, copeiros).<br>
-            ⚠️ <em>Para restrições alimentares ou sucos naturais, clique no botão do WhatsApp ao final.</em>
+            ⚠️ <em>Para restrições alimentares ou sucos naturais, clique no botão final.</em>
         </div>
 
-        <button type="button" class="btn" onclick="calcularOrcamento()">Visualizar orçamento</button>
+        <button type="button" class="btn" onclick="calcularOrcamento()">Visualizar resumo matemático</button>
     </form>
 
     <div id="resultado" class="resultado-box">
-        <h3>ORÇAMENTO SOLICITADO</h3>
+        <h3>MÉTRICAS DO SISTEMA</h3>
         
         <div style="margin-bottom: 20px; font-size: 1.1rem; border-bottom: 1px solid #EEE; padding-bottom: 10px;">
             <div><strong>Cliente:</strong> <span id="resNome">-</span></div>
-            <div><strong>Data e Hora:</strong> <span id="resDataHora">-</span></div>
+            <div><strong>Data/Hora:</strong> <span id="resDataHora">-</span></div>
             <div><strong>Total de Convidados:</strong> <span id="resConvidados">-</span></div>
             <div><strong>Métricas de Integrais:</strong> <span id="resIntegrais">-</span></div>
         </div>
@@ -328,30 +286,33 @@
         <div id="containerCardapiosCalculados"></div>
 
         <div style="margin-top: 25px;">
-            <!-- O botão agora dispara a geração estruturada do PDF e em seguida abre o WhatsApp -->
-            <button class="btn btn-whatsapp" onclick="dispararFluxoConfirmacao()">Confirmar pedido e verificar agenda</button>
+            <!-- Dispara a automação em lote da IA -->
+            <button class="btn btn-ia" id="btnGerarIa" onclick="gerarPropostaComIA()">✨ Confirmar Pedido e Criar Design Premium</button>
         </div>
     </div>
 </div>
 
-<!-- Elemento invisível na tela que serve de fôrma para o html2pdf capturar o layout Canva -->
-<div id="propostaPdfTemplate"></div>
-
 <script>
+    // ==========================================
+    //       ESPAÇO MATRIZ: SUA CHAVE DE API
+    // ==========================================
+    const GEMINI_API_KEY = "COLE_SUA_API_KEY_AQUI"; 
+    // ==========================================
+
     const tabelaPrecos = {
-        faixa_20_30: { crepe_exec1: 120, crepe_exec2: 125, crepe_prem: 130, pizza_exec1: 125, pizza_exec2: 130, pizza_prem: 135, infantil: 110, infantil_massas: 125, rodizio_pizza: 110, rodizio_massas: 125, churrasco: 120, feijoada: 95 },
-        faixa_30_40: { crepe_exec1: 100, crepe_exec2: 110, crepe_prem: 120, pizza_exec1: 110, pizza_exec2: 120, pizza_prem: 130, infantil: 100, infantil_massas: 110, rodizio_pizza: 100, rodizio_massas: 110, churrasco: 100, feijoada: 90 },
-        faixa_40_50: { crepe_exec1: 95,  crepe_exec2: 100, crepe_prem: 105, pizza_exec1: 105, pizza_exec2: 110, pizza_prem: 115, infantil: 90,  infantil_massas: 100, rodizio_pizza: 90,  rodizio_massas: 100, churrasco: 95,  feijoada: 85 },
-        faixa_acima_50: { crepe_exec1: 90, crepe_exec2: 95, crepe_prem: 100, pizza_exec1: 100, pizza_exec2: 105, pizza_prem: 110, infantil: 90, infantil_massas: 95,  rodizio_pizza: 90,  rodizio_massas: 100, churrasco: 95,  feijoada: 80 }
+        faixa_20_30: { crepe_exec1: 120, crepe_exec2: 125, crepe_prem: 130, pizza_exec1: 125, pizza_exec2: 130, pizza_prem: 135, infantil: 110, churrasco: 120, feijoada: 95 },
+        faixa_30_40: { crepe_exec1: 100, crepe_exec2: 110, crepe_prem: 120, pizza_exec1: 110, pizza_exec2: 120, pizza_prem: 130, infantil: 100, churrasco: 100, feijoada: 90 },
+        faixa_40_50: { crepe_exec1: 95,  crepe_exec2: 100, crepe_prem: 105, pizza_exec1: 105, pizza_exec2: 110, pizza_prem: 115, infantil: 90,  churrasco: 95,  feijoada: 85 },
+        faixa_acima_50: { crepe_exec1: 90, crepe_exec2: 95, crepe_prem: 100, pizza_exec1: 100, pizza_exec2: 105, pizza_prem: 110, infantil: 90, churrasco: 95,  feijoada: 80 }
     };
 
     const nomesCardapios = {
         crepe_exec1: "Crepes Franceses - Executivo 1", crepe_exec2: "Crepes Franceses - Executivo 2", crepe_prem: "Crepes Franceses - Premium",
         pizza_exec1: "Crepes + Pizza - Executivo 1", pizza_exec2: "Crepes + Pizza - Executivo 2", pizza_prem: "Crepes + Pizza - Premium",
-        infantil: "Buffet Infantil", infantil_massas: "Buffet Infantil + 2 Massas",
-        rodizio_pizza: "Rodízio de Pizzas", rodizio_massas: "Rodízio de Pizzas + 2 Massas",
-        churrasco: "Churrasco do Chefe", feijoada: "Feijoada do Voalá!", personalizado: "Cardápio Personalizado"
+        infantil: "Buffet Infantil", churrasco: "Churrasco do Chefe", feijoada: "Feijoada do Voalá!"
     };
+
+    let payloadUltimoCalculo = {};
 
     function calcularOrcamento() {
         const nome = document.getElementById('nome').value || "Não informado";
@@ -362,16 +323,12 @@
         const c7_11 = parseInt(document.getElementById('criancas_7_11').value) || 0;
         const cMenor7 = parseInt(document.getElementById('criancas_menores_7').value) || 0;
 
-        const integralAdultos = adultos;
-        const integralC7_11 = Math.floor(c7_11 / 2);
-        const integralCMenor7 = cMenor7 >= 6 ? Math.floor(cMenor7 / 6) : 0;
-
-        const totalIntegrais = integralAdultos + integralC7_11 + integralCMenor7;
+        const totalIntegrais = adultos + Math.floor(c7_11 / 2) + (cMenor7 >= 6 ? Math.floor(cMenor7 / 6) : 0);
         const totalConvidados = adultos + c7_11 + cMenor7;
         const totalCriancasGeral = c7_11 + cMenor7;
 
         document.getElementById('resNome').innerText = nome;
-        document.getElementById('resDataHora').innerText = (data && horario) ? `${data.split('-').reverse().join('/')} às ${horario}` : "Preencha a data e horário acima";
+        document.getElementById('resDataHora').innerText = (data && horario) ? `${data.split('-').reverse().join('/')} às ${horario}` : "Aguardando definição...";
         document.getElementById('resConvidados').innerText = `${totalConvidados} pessoas`;
         document.getElementById('resIntegrais').innerText = `${totalIntegrais} integrais (${adultos} adultos e ${totalCriancasGeral} crianças)`;
 
@@ -380,233 +337,101 @@
         containerCalculados.innerHTML = "";
 
         if (checkboxes.length === 0) {
-            containerCalculados.innerHTML = "<p style='color: #888; text-align: center;'>Nenhum cardápio selecionado para exibição.</p>";
+            containerCalculados.innerHTML = "<p style='color: #888; text-align: center;'>Nenhum cardápio selecionado.</p>";
             document.getElementById('resultado').style.display = 'block';
             return;
         }
 
+        let listaResumos = [];
+
         checkboxes.forEach((cb) => {
             const cardapioKey = cb.value;
-            let precoUnitario = 0;
-            let precisaAvaliar = false;
-            let faixa = "";
+            let faixa = totalIntegrais >= 50 ? "faixa_acima_50" : totalIntegrais >= 40 ? "faixa_40_50" : totalIntegrais >= 30 ? "faixa_30_40" : "faixa_20_30";
+            let precoUnitario = tabelaPrecos[faixa][cardapioKey] || 100;
+            let valorTotal = totalIntegrais * precoUnitario;
 
-            if (cardapioKey === "personalizado" || totalIntegrais < 20) {
-                precisaAvaliar = true;
-            } else if (totalIntegrais >= 20 && totalIntegrais < 30) {
-                faixa = "faixa_20_30";
-            } else if (totalIntegrais >= 30 && totalIntegrais < 40) {
-                faixa = "faixa_30_40";
-            } else if (totalIntegrais >= 40 && totalIntegrais < 50) {
-                faixa = "faixa_40_50";
-            } else {
-                faixa = "faixa_acima_50";
-            }
-
-            if (!precisaAvaliar && faixa) {
-                precoUnitario = tabelaPrecos[faixa][cardapioKey];
-            }
-
-            const valorTotal = totalIntegrais * precoUnitario;
-            const nomeExibicao = nomesCardapios[cardapioKey];
+            listaResumos.push({ nome: nomesCardapios[cardapioKey], unitario: precoUnitario, total: valorTotal });
 
             const bloco = document.createElement('div');
             bloco.className = "cardapio-calculado-bloco";
-            
-            let htmlBloco = `<div class="cardapio-titulo-bloco">✨ ${nomeExibicao}</div>`;
-            if (precisaAvaliar) {
-                htmlBloco += `
-                    <div class="resultado-item"><span>Valor por Integral:</span> <strong>Sob consulta</strong></div>
-                    <div class="resultado-item total-item"><span>VALOR TOTAL:</span> <strong>Avaliar via WhatsApp</strong></div>
-                `;
-            } else {
-                htmlBloco += `
-                    <div class="resultado-item"><span>Valor por Integral:</span> <strong>R$ ${precoUnitario},00</strong></div>
-                    <div class="resultado-item total-item"><span>VALOR TOTAL:</span> <strong>R$ ${valorTotal},00</strong></div>
-                `;
-            }
-
-            bloco.innerHTML = htmlBloco;
+            bloco.innerHTML = `<strong>✨ ${nomesCardapios[cardapioKey]}</strong><br>Valor por Integral: R$ ${precoUnitario},00<br>Total do Pacote: R$ ${valorTotal},00`;
             containerCalculados.appendChild(bloco);
         });
 
+        payloadUltimoCalculo = { nome, data, horario, totalConvidados, adultos, totalCriancasGeral, totalIntegrais, listaResumos };
         document.getElementById('resultado').style.display = 'block';
     }
 
-    // Função de apoio para montar o HTML visual premium dentro do contêiner invisível
-    function montarTemplatePropostaEstilizada() {
-        const nome = document.getElementById('nome').value || "Cliente";
-        const dataInput = document.getElementById('data').value;
-        const dataFormatada = dataInput ? dataInput.split('-').reverse().join('/') : "A definir";
-        const horario = document.getElementById('horario').value || "A definir";
-        
-        const adultos = parseInt(document.getElementById('adultos').value) || 0;
-        const c7_11 = parseInt(document.getElementById('criancas_7_11').value) || 0;
-        const cMenor7 = parseInt(document.getElementById('criancas_menores_7').value) || 0;
-        const totalConvidados = adultos + c7_11 + cMenor7;
-
-        const integralAdultos = adultos;
-        const integralC7_11 = Math.floor(c7_11 / 2);
-        const integralCMenor7 = cMenor7 >= 6 ? Math.floor(cMenor7 / 6) : 0;
-        const totalIntegrais = integralAdultos + integralC7_11 + integralCMenor7;
-
-        const checkboxes = document.querySelectorAll('input[name="cardapios"]:checked');
-        let htmlCardapiosLista = "";
-
-        checkboxes.forEach((cb) => {
-            const cardapioKey = cb.value;
-            const nomeExibicao = nomesCardapios[cardapioKey];
-            let precoUnitario = 0;
-            let precisaAvaliar = false;
-            let faixa = "";
-
-            if (cardapioKey === "personalizado" || totalIntegrais < 20) {
-                precisaAvaliar = true;
-            } else if (totalIntegrais >= 20 && totalIntegrais < 30) {
-                faixa = "faixa_20_30";
-            } else if (totalIntegrais >= 30 && totalIntegrais < 40) {
-                faixa = "faixa_30_40";
-            } else if (totalIntegrais >= 40 && totalIntegrais < 50) {
-                faixa = "faixa_40_50";
-            } else {
-                faixa = "faixa_acima_50";
-            }
-
-            if (!precisaAvaliar && faixa) {
-                precoUnitario = tabelaPrecos[faixa][cardapioKey];
-            }
-
-            const valorTotalCalculado = totalIntegrais * precoUnitario;
-
-            htmlCardapiosLista += `
-                <div style="background: #ffffff; border: 1px solid #eedecf; padding: 14px; border-radius: 6px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
-                    <h4 style="margin: 0 0 6px 0; font-size: 14px; color: #FF6600; font-family: 'Orbitron', sans-serif;">${nomeExibicao}</h4>
-                    <p style="font-size: 12.5px; margin: 4px 0; color: #444;"><strong>Métricas:</strong> ${totalIntegrais} integrais calculadas</p>
-                    <p style="font-size: 13px; margin: 4px 0; color: #111;"><strong>Valor Unitário:</strong> ${precisaAvaliar ? 'Sob consulta' : 'R$ ' + precoUnitario + ',00'}</p>
-                    <p style="font-size: 14px; margin: 6px 0 0 0; color: #FF6600; font-weight: bold; border-top: 1px dashed #eee; padding-top: 6px;">
-                        Investimento Estimado: ${precisaAvaliar ? 'Avaliar via WhatsApp' : 'R$ ' + valorTotalCalculado + ',00'}
-                    </p>
-                </div>
-            `;
-        });
-
-        // Retorna o layout estruturado em 75% na pág 1 e 25% na pág 2 (Estilo Canva Premium)
-        return `
-            <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #2D2D30; padding: 20px; background: #ffffff;">
-                
-                <!-- PÁGINA 1: IDENTIDADE VISUAL E PROPOSTA COMERCIAL -->
-                <div style="text-align: center; border-bottom: 3px solid #FF6600; padding-bottom: 15px; margin-bottom: 25px;">
-                    <h1 style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 28px; color: #1E1E24; letter-spacing: 2px;">VOALÁ! BUFFET</h1>
-                    <p style="margin: 6px 0 0 0; font-size: 11px; color: #FF6600; text-transform: uppercase; letter-spacing: 4px; font-weight: bold;">Soluções & Eventos</p>
-                </div>
-
-                <div style="margin-bottom: 25px; background: #FFF5EE; padding: 18px; border-radius: 8px; border-left: 5px solid #FF6600;">
-                    <h3 style="margin: 0 0 12px 0; font-family: 'Orbitron', sans-serif; font-size: 14px; color: #1E1E24; text-transform: uppercase; letter-spacing: 1px;">Proposta Comercial de Buffet</h3>
-                    <p style="margin: 5px 0; font-size: 13.5px;"><strong>Cliente Solicitante:</strong> ${nome}</p>
-                    <p style="margin: 5px 0; font-size: 13.5px;"><strong>Data Evento:</strong> ${dataFormatada} às ${horario}h</p>
-                    <p style="margin: 5px 0; font-size: 13.5px;"><strong>Total de Pessoas:</strong> ${totalConvidados} presentes (${adultos} adultos e ${c7_11 + cMenor7} crianças)</p>
-                </div>
-
-                <h3 style="font-family: 'Orbitron', sans-serif; font-size: 13px; color: #1E1E24; border-bottom: 1px solid #FF6600; padding-bottom: 4px; margin-top: 25px; text-transform: uppercase; letter-spacing: 0.5px;">Diretrizes do Atendimento</h3>
-                <p style="font-size: 12.5px; line-height: 1.6; color: #444; margin-bottom: 20px; text-align: justify;">
-                    <strong>Da recepção:</strong> Iniciamos nossos trabalhos com a montagem completa da praça técnica, recepção dedicada e acolhimento dos convidados. Assim que o ambiente estiver estabilizado, daremos início ao serviço de bebidas e aguardaremos a sua validação para a liberação do cardápio gastronômico principal.
-                </p>
-
-                <h3 style="font-family: 'Orbitron', sans-serif; font-size: 13px; color: #1E1E24; border-bottom: 1px solid #FF6600; padding-bottom: 4px; margin-top: 25px; text-transform: uppercase; letter-spacing: 0.5px;">Cardápios Simulados</h3>
-                <div style="margin-top: 10px;">
-                    ${htmlCardapiosLista || '<p style="color:#888;">Nenhum cardápio foi selecionado.</p>'}
-                </div>
-
-                <!-- QUEBRA DE PÁGINA FIXADA PARA CRIAÇÃO DO PORTFÓLIO DE 2 PÁGINAS -->
-                <div class="html2pdf__page-break"></div>
-
-                <!-- PÁGINA 2: INFRAESTRUTURA INCLUSA E FECHAMENTO -->
-                <h3 style="font-family: 'Orbitron', sans-serif; font-size: 13px; color: #1E1E24; border-bottom: 1px solid #FF6600; padding-bottom: 4px; margin-top: 20px; text-transform: uppercase; letter-spacing: 0.5px;">Estrutura Operacional Inclusa</h3>
-                <p style="font-size: 12.5px; line-height: 1.6; color: #444; text-align: justify;">
-                    Nossa proposta engloba o fornecimento completo de kits de louças básicas (pratos planos, talheres higienizados de inox e taças de vidro adequadas), além de todos os materiais descartáveis secundários. O serviço conta com equipe especializada de retaguarda (cozinheiros profissionais e auxiliares sob medida) e staff de atendimento volante.
-                </p>
-
-                <div style="text-align: center; margin-top: 45px; background: #1E1E24; color: #ffffff; padding: 25px; border-radius: 8px; border-bottom: 4px solid #FF6600;">
-                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #FF9933; font-weight: bold; font-family: 'Orbitron', sans-serif;">Validação de Proposta</span>
-                    <h2 style="margin: 8px 0 0 0; font-size: 20px; font-family: 'Orbitron', sans-serif; color: #ffffff;">CONFIRMAÇÃO VIA WHATSAPP</h2>
-                    <p style="margin: 6px 0 0 0; font-size: 12px; color: #cccccc;">Validade das condições simuladas: 30 dias</p>
-                </div>
-
-                <div style="margin-top: 70px; text-align: center; border-top: 1px solid #eee; padding-top: 25px;">
-                    <p style="margin: 0; font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: bold; color: #1E1E24;">Chefe Paulo Xavier</p>
-                    <p style="margin: 4px 0; font-size: 12.5px; color: #555; font-weight: 500;">Voalá! Buffet — Soluções & Eventos</p>
-                    <p style="margin: 20px 0 0 0; font-size: 11px; color: #999; font-family: sans-serif; letter-spacing: 0.5px;">Contato Comercial: (92) 98847-2009 | CNPJ: 40.623.321/0001-20</p>
-                </div>
-
-            </div>
-        `;
-    }
-
-    // Gerencia o fluxo duplo: monta o PDF em background, força o download e abre a API do WhatsApp
-    function dispararFluxoConfirmacao() {
-        const nome = document.getElementById('nome').value;
-        if (!nome || nome.trim() === "") {
-            alert("Por favor, preencha o seu nome antes de prosseguir com a confirmação.");
+    async function gerarPropostaComIA() {
+        if (!GEMINI_API_KEY || GEMINI_API_KEY === "COLE_SUA_API_KEY_AQUI") {
+            alert("Configuração incompleta: insira a Chave de API no código matriz da aplicação.");
             return;
         }
 
-        const dataInput = document.getElementById('data').value;
-        const horario = document.getElementById('horario').value;
-        const adultos = document.getElementById('adultos').value;
-        const c7_11 = document.getElementById('criancas_7_11').value;
-        const cMenor7 = document.getElementById('criancas_menores_7').value;
+        const btn = document.getElementById("btnGerarIa");
+        btn.innerText = "IA Gerando Catálogo Customizado...";
+        btn.disabled = true;
 
-        // Injeta o HTML renderizado dentro da div oculta do DOM
-        const targetContainer = document.getElementById("propostaPdfTemplate");
-        targetContainer.innerHTML = montarTemplatePropostaEstilizada();
+        const promptia = `Você é um Web Designer Sênior e Projetista Comercial Executivo.
+        Construa um código de página HTML completo, elegante e independente contendo uma Proposta Comercial Visual Premium (Padrão Canva/Portfólio Editorial de Vendas) para o "Voalá! Buffet".
+        Utilize fontes limpas e luxuosas do Google Fonts, uma paleta sofisticada com fundo off-white/creme bem claro, tipografias pretas e detalhes em dourado escuro ou laranjas da marca.
+        O layout deve conter caixas simétricas e limpas organizando os detalhes do evento fornecidos.
+        Exigência fundamental: Desenvolva uma tag <style> de escopo interno contendo regras CSS robustas para impressão em folhas A4 (use quebras de páginas com page-break de forma cirúrgica para separar o miolo técnico do bloco final de encerramento).
+        Retorne estritamente o código fonte HTML puro, iniciando imediatamente com <!DOCTYPE html>. Não inclua explicações de texto antes ou depois e não adicione cercados de markdown (\`\`\`).
 
-        // Trata a string para gerar o nome limpo do arquivo baixado
-        const nomeFormatado = nome.toLowerCase().trim().replace(/\s+/g, '_');
-        const nomeArquivoPdf = `orcamento_${nomeFormatado}_Voalá!.pdf`;
+        Métricas Operacionais Recebidas:
+        - Nome do Solicitante: ${payloadUltimoCalculo.nome}
+        - Data do Planejamento: ${payloadUltimoCalculo.data}
+        - Janela de Horário: ${payloadUltimoCalculo.horario}h
+        - Volume Total: ${payloadUltimoCalculo.totalConvidados} convidados (${payloadUltimoCalculo.adultos} adultos e ${payloadUltimoCalculo.totalCriancasGeral} crianças)
+        - Base de Cálculo: ${payloadUltimoCalculo.totalIntegrais} integrais operacionais
+        - Estrutura Financeira dos Cardápios Escolhidos: ${JSON.stringify(payloadUltimoCalculo.listaResumos)}
+        
+        Cláusula de Atendimento Básica Inclusa: Fornecimento de louças completas (inox e vidro), bebidas de linha completas com refrigerantes e sucos integrais, logística estruturada e brigada de atendimento liderada pelo Chefe Paulo Xavier.
+        Validade da Proposta Comercial: 30 dias lineares. Contato Institucional: (92) 98847-2009.`;
 
-        const configuracaoPdf = {
-            margin:      [15, 15, 15, 15],
-            filename:    nomeArquivoPdf,
-            image:       { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-            jsPDF:       { unit: "mm", format: "a4", orientation: "portrait" },
-            pagebreak:   { mode: ['css', 'legacy'] }
-        };
-
-        // Roda a conversão
-        html2pdf()
-            .set(configuracaoPdf)
-            .from(targetContainer)
-            .outputPdf("blob")
-            .then(function(blob) {
-                // Executa a rotina nativa de download no navegador
-                const blobUrl = URL.createObjectURL(blob);
-                const gatilhoDownload = document.createElement("a");
-                gatilhoDownload.href = blobUrl;
-                gatilhoDownload.download = nomeArquivoPdf;
-                document.body.appendChild(gatilhoDownload);
-                gatilhoDownload.click();
-                document.body.removeChild(gatilhoDownload);
-                URL.revokeObjectURL(blobUrl);
-
-                // Captura as strings de texto selecionadas para enviar o espelho no corpo da conversa
-                const checkboxes = document.querySelectorAll('input[name="cardapios"]:checked');
-                let cardapiosTexto = "";
-                checkboxes.forEach((cb) => {
-                    cardapiosTexto += `-%20${nomesCardapios[cb.value]}%0A`;
-                });
-
-                // Redirecionamento estratégico com chamada explícita para o envio do arquivo
-                let msgWhats = `Olá%20Chefe%20Paulo!%20Acabei%20de%20gerar%20o%20meu%20orçamento%20estilizado%20no%20sistema.%0A%0A`;
-                msgWhats += `*Gostaria%20de%20confirmar%20meu%20pedido%20e%20verificar%20a%20sua%20agenda!*%0A%0A`;
-                msgWhats += `•%20*Solicitante:*%20${nome}%0A`;
-                msgWhats += `•%20*Data/Hora:*%20${dataInput.split('-').reverse().join('/')}%20às%20${horario}%0A`;
-                msgWhats += `•%20*Convidados:*%20Adultos:%20${adultos},%20Crianças:%20${parseInt(c7_11)+parseInt(cMenor7)}%0A`;
-                msgWhats += `•%20*Opções:*%0A${cardapiosTexto}%0A`;
-                msgWhats += `_Estou%20te%20enviando%20em%20anexo%20o%20PDF%20de%20orçamento%20que%20o%20site%20acabou%20de%20baixar%20aqui!_`;
-
-                window.open(`https://api.whatsapp.com/send?phone=5592988472009&text=${msgWhats}`, '_blank');
+        try {
+            const resposta = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ contents: [{ parts: [{ text: promptia }] }] })
             });
+
+            const dadosJson = await resposta.json();
+            let htmlGeradoPelaIa = dadosJson.candidates[0].content.parts[0].text;
+
+            // Limpa resíduos de markdown se houver
+            htmlGeradoPelaIa = htmlGeradoPelaIa.replace(/```html/g, "").replace(/```/g, "").trim();
+
+            // Renderiza o documento na tela do cliente abrindo em nova guia nativa
+            const novaJanelaProposta = window.open();
+            novaJanelaProposta.document.open();
+            novaJanelaProposta.document.write(htmlGeradoPelaIa);
+            novaJanelaProposta.document.close();
+
+            // Formatação do texto do link para encaminhamento de leads no WhatsApp
+            let cardapiosTexto = "";
+            payloadUltimoCalculo.listaResumos.forEach((item) => {
+                cardapiosTexto += `-%20${item.nome}:%20R$%20${item.total},00%0A`;
+            });
+
+            let msgWhats = `Olá%20Chefe%20Paulo!%20Meu%20orçamento%20estilizado%20acaba%20de%20ser%20gerado%20pelo%20sistema.%0A%0A`;
+            msgWhats += `*Gostaria%20de%20confirmar%20meu%20pedido%20e%20verificar%20a%20agenda!*%0A%0A`;
+            msgWhats += `•%20*Solicitante:*%20${payloadUltimoCalculo.nome}%0A`;
+            msgWhats += `•%20*Data/Hora:*%20${payloadUltimoCalculo.data.split('-').reverse().join('/')}%20às%20${payloadUltimoCalculo.horario}%0A`;
+            msgWhats += `•%20*Integrais:*%20${payloadUltimoCalculo.totalIntegrais}%20calculadas%0A`;
+            msgWhats += `•%20*Valores%20Simulados:*%0A${cardapiosTexto}%0A`;
+            msgWhats += `_A%20página%20com%20o%20design%20de%20luxo%20abriu%20aqui%20na%20minha%20tela,%20vou%20te%20enviar%20o%20print/PDF!_`;
+
+            window.open(`https://api.whatsapp.com/send?phone=5592988472009&text=${msgWhats}`, '_blank');
+
+        } catch (erro) {
+            console.error(erro);
+            alert("Ocorreu uma falha no processamento do motor de IA. Verifique as credenciais no código matriz.");
+        } finally {
+            btn.innerText = "✨ Confirmar Pedido e Criar Design Premium";
+            btn.disabled = false;
+        }
     }
 </script>
 
