@@ -103,12 +103,42 @@
             gap: 15px;
         }
 
-        .info-box {
+        /* ESTILIZAÇÃO DA ÁREA DE SELEÇÃO MÚLTIPLA */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
             background: #FFF5EE;
-            border-left: 4px solid var(--orange-neon);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 102, 0, 0.2);
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            width: auto;
+            cursor: pointer;
+            transform: scale(1.2);
+            accent-color: var(--orange-primary);
+        }
+
+        .info-box {
+            background: #F4F4F6;
+            border-left: 4px solid var(--dark-gray);
             padding: 15px;
             border-radius: 8px;
             font-size: 0.95rem;
+            margin-top: 20px;
             margin-bottom: 25px;
             line-height: 1.4;
         }
@@ -145,38 +175,60 @@
             box-shadow: 0 6px 20px rgba(32, 186, 90, 0.4);
         }
 
+        /* CAIXA DE RESULTADO - AGORA TOTALMENTE BRANCA */
         .resultado-box {
-            background: var(--dark-gray);
-            color: #FFF;
+            background: #FFFFFF;
+            color: var(--text-dark);
             padding: 25px;
             border-radius: 12px;
             margin-top: 25px;
             display: none;
-            border-bottom: 4px solid var(--orange-primary);
+            border: 2px solid var(--orange-primary);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.15);
         }
 
         .resultado-box h3 {
             font-family: 'Orbitron', sans-serif;
-            color: var(--orange-neon);
+            color: var(--orange-primary);
             margin-top: 0;
-            border-bottom: 1px solid #444;
+            border-bottom: 2px solid var(--orange-neon);
             padding-bottom: 10px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .cardapio-calculado-bloco {
+            background: #FFF9F5;
+            border: 1px dashed var(--orange-neon);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .cardapio-titulo-bloco {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--orange-primary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 102, 0, 0.1);
+            padding-bottom: 4px;
         }
 
         .resultado-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 1.1rem;
+            margin-bottom: 6px;
+            font-size: 1.05rem;
         }
 
         .total-item {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--orange-neon);
-            border-top: 1px dashed #555;
-            padding-top: 15px;
-            margin-top: 15px;
+            font-size: 1.25rem;
+            color: var(--orange-primary);
+            font-weight: bold;
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px dashed rgba(255, 102, 0, 0.2);
         }
 
         .whatsapp-link {
@@ -188,49 +240,30 @@
 
 <div class="container">
     <div class="logo-container">
-        <!-- ALTERE AQUI: Substitua a tag abaixo pela sua logo real quando quiser, ex: <img src="sualogo.png"> -->
         <div class="logo-placeholder">[ SUA LOGO AQUI ]</div>
     </div>
 
     <h1>Voalá! Buffet</h1>
-    <p class="orientacao">Olá! Preencha os campos abaixo e veja seu orçamento na hora.</p>
+    <p class="orientacao">Olá! Preencha os campos abaixo e monte sua simulação em tempo real.</p>
 
     <form id="orcamentoForm" onsubmit="event.preventDefault(); calcularOrcamento();">
         <div class="form-group">
             <label for="nome">Nome do Solicitante *</label>
-            <input type="text" id="nome" placeholder="Como podemos te chamar?" required>
+            <input type="text" id="nome" placeholder="Como podemos te chamar?" required oninput="calcularOrcamento()">
         </div>
 
         <div class="grid-3">
             <div class="form-group">
                 <label for="data">Data Prevista *</label>
-                <input type="date" id="data" required>
+                <input type="date" id="data" required onchange="calcularOrcamento()">
             </div>
             <div class="form-group">
                 <label for="horario">Horário *</label>
-                <input type="time" id="horario" required>
-            </div>
-            <div class="form-group">
-                <label for="cardapio">Cardápio desejado *</label>
-                <select id="cardapio" required onchange="calcularOrcamento()">
-                    <option value="crepe_exec1">Crepes Franceses - Executivo 1</option>
-                    <option value="crepe_exec2">Crepes Franceses - Executivo 2</option>
-                    <option value="crepe_prem">Crepes Franceses - Premium</option>
-                    <option value="pizza_exec1">Crepes + Pizza - Executivo 1</option>
-                    <option value="pizza_exec2">Crepes + Pizza - Executivo 2</option>
-                    <option value="pizza_prem">Crepes + Pizza - Premium</option>
-                    <option value="infantil">Buffet Infantil</option>
-                    <option value="infantil_massas">Buffet Infantil + 2 Massas</option>
-                    <option value="rodizio_pizza">Rodízio de Pizzas</option>
-                    <option value="rodizio_massas">Rodízio de Pizzas + 2 Massas</option>
-                    <option value="churrasco">Churrasco do Chefe</option>
-                    <option value="feijoada">Feijoada do Voalá!</option>
-                    <option value="personalizado">Cardápio Personalizado (A definir)</option>
-                </select>
+                <input type="time" id="horario" required onchange="calcularOrcamento()">
             </div>
         </div>
 
-        <p class="orientacao">Agora, informe a quantidade de convidados para calcular as integrais:</p>
+        <p class="orientacao">Informe a quantidade de convidados para o cálculo das integrais:</p>
 
         <div class="grid-3">
             <div class="form-group">
@@ -247,8 +280,27 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label>Selecione os Cardápios para comparar (Marque quantos quiser) *</label>
+            <div class="checkbox-grid">
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="crepe_exec1" onchange="calcularOrcamento()"> Crepes Franceses - Executivo 1</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="crepe_exec2" onchange="calcularOrcamento()"> Crepes Franceses - Executivo 2</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="crepe_prem" onchange="calcularOrcamento()"> Crepes Franceses - Premium</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec1" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 1</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec2" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 2</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_prem" onchange="calcularOrcamento()"> Crepes + Pizza - Premium</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil" onchange="calcularOrcamento()"> Buffet Infantil</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil_massas" onchange="calcularOrcamento()"> Buffet Infantil + 2 Massas</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="rodizio_pizza" onchange="calcularOrcamento()"> Rodízio de Pizzas</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="rodizio_massas" onchange="calcularOrcamento()"> Rodízio de Pizzas + 2 Massas</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="churrasco" onchange="calcularOrcamento()"> Churrasco do Chefe</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="feijoada" onchange="calcularOrcamento()"> Feijoada do Voalá!</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="personalizado" onchange="calcularOrcamento()"> Cardápio Personalizado (A definir via WhatsApp)</label>
+            </div>
+        </div>
+
         <div class="info-box">
-            <strong>O que já está incluso no seu pacote:</strong><br>
+            <strong>O que já está incluso em todos os pacotes:</strong><br>
             🍽️ <strong>Louças completas:</strong> talheres, taças e pratos.<br>
             🥤 <strong>Bebidas de linha:</strong> Coca-cola, Coca-zero, Guaraná Antártica e sucos integrais (laranja/uva).<br>
             🧑‍🍳 <strong>Equipe de Serviço:</strong> profissionais necessários (churrasqueiros, cozinheiros, garçons, copeiros).<br>
@@ -260,32 +312,18 @@
 
     <div id="resultado" class="resultado-box">
         <h3>ORÇAMENTO SOLICITADO</h3>
-        <div class="resultado-item">
-            <span>Cliente:</span>
-            <strong id="resNome">-</strong>
-        </div>
-        <div class="resultado-item">
-            <span>Data e Hora:</span>
-            <strong id="resDataHora">-</strong>
-        </div>
-        <div class="resultado-item">
-            <span>Total de Convidados:</span>
-            <strong id="resConvidados">-</strong>
-        </div>
-        <div class="resultado-item">
-            <span>Cálculo de Integrais:</span>
-            <strong id="resIntegrais">-</strong>
-        </div>
-        <div class="resultado-item">
-            <span>Valor por Integral:</span>
-            <strong id="resValorUnitario">-</strong>
-        </div>
-        <div class="total-item resultado-item">
-            <span>VALOR TOTAL VALOR:</span>
-            <strong id="resTotal">-</strong>
+        
+        <div style="margin-bottom: 20px; font-size: 1.1rem; border-bottom: 1px solid #EEE; padding-bottom: 10px;">
+            <div><strong>Cliente:</strong> <span id="resNome">-</span></div>
+            <div><strong>Data e Hora:</strong> <span id="resDataHora">-</span></div>
+            <div><strong>Total de Convidados:</strong> <span id="resConvidados">-</span></div>
+            <div><strong>Métricas de Integrais:</strong> <span id="resIntegrais">-</span></div>
         </div>
 
-        <div style="margin-top: 20px;">
+        <!-- ÁREA ONDE SURGIRÃO TODOS OS CARDÁPIOS CALCULADOS SEPARADAMENTE -->
+        <div id="containerCardapiosCalculados"></div>
+
+        <div style="margin-top: 25px;">
             <a id="whatsappLink" href="#" target="_blank" class="whatsapp-link">
                 <button class="btn btn-whatsapp">Confirmar pedido e verificar agenda</button>
             </a>
@@ -301,11 +339,18 @@
         faixa_acima_50: { crepe_exec1: 90, crepe_exec2: 95, crepe_prem: 100, pizza_exec1: 100, pizza_exec2: 105, pizza_prem: 110, infantil: 90, infantil_massas: 95,  rodizio_pizza: 90,  rodizio_massas: 100, churrasco: 95,  feijoada: 80 }
     };
 
+    const nomesCardapios = {
+        crepe_exec1: "Crepes Franceses - Executivo 1", crepe_exec2: "Crepes Franceses - Executivo 2", crepe_prem: "Crepes Franceses - Premium",
+        pizza_exec1: "Crepes + Pizza - Executivo 1", pizza_exec2: "Crepes + Pizza - Executivo 2", pizza_prem: "Crepes + Pizza - Premium",
+        infantil: "Buffet Infantil", infantil_massas: "Buffet Infantil + 2 Massas",
+        rodizio_pizza: "Rodízio de Pizzas", rodizio_massas: "Rodízio de Pizzas + 2 Massas",
+        churrasco: "Churrasco do Chefe", feijoada: "Feijoada do Voalá!", personalizado: "Cardápio Personalizado"
+    };
+
     function calcularOrcamento() {
         const nome = document.getElementById('nome').value || "Não informado";
         const data = document.getElementById('data').value;
         const horario = document.getElementById('horario').value;
-        const cardapio = document.getElementById('cardapio').value;
         
         const adultos = parseInt(document.getElementById('adultos').value) || 0;
         const c7_11 = parseInt(document.getElementById('criancas_7_11').value) || 0;
@@ -319,49 +364,80 @@
         const totalConvidados = adultos + c7_11 + cMenor7;
         const totalCriancasGeral = c7_11 + cMenor7;
 
-        let precoUnitario = 0;
-        let precisaAvaliar = false;
-        let faixa = "";
-
-        if (cardapio === "personalizado" || totalIntegrais < 20) {
-            precisaAvaliar = true;
-        } else if (totalIntegrais >= 20 && totalIntegrais < 30) {
-            faixa = "faixa_20_30";
-        } else if (totalIntegrais >= 30 && totalIntegrais < 40) {
-            faixa = "faixa_30_40";
-        } else if (totalIntegrais >= 40 && totalIntegrais < 50) {
-            faixa = "faixa_40_50";
-        } else {
-            faixa = "faixa_acima_50";
-        }
-
-        if (!precisaAvaliar && faixa) {
-            precoUnitario = tabelaPrecos[faixa][cardapio];
-        }
-
-        const valorTotal = totalIntegrais * precoUnitario;
-
         document.getElementById('resNome').innerText = nome;
         document.getElementById('resDataHora').innerText = (data && horario) ? `${data.split('-').reverse().join('/')} às ${horario}` : "Preencha a data e horário acima";
         document.getElementById('resConvidados').innerText = `${totalConvidados} pessoas`;
         document.getElementById('resIntegrais').innerText = `${totalIntegrais} integrais (${adultos} adultos e ${totalCriancasGeral} crianças)`;
-        
-        if (precisaAvaliar) {
-            document.getElementById('resValorUnitario').innerText = "Sob consulta";
-            document.getElementById('resTotal').innerText = "Avaliar via WhatsApp";
-        } else {
-            document.getElementById('resValorUnitario').innerText = `R$ ${precoUnitario},00`;
-            document.getElementById('resTotal').innerText = `R$ ${valorTotal},00`;
+
+        // Captura todos os cardápios selecionados
+        const checkboxes = document.querySelectorAll('input[name="cardapios"]:checked');
+        const containerCalculados = document.getElementById('containerCardapiosCalculados');
+        containerCalculados.innerHTML = ""; // Limpa a tela para recalcular tudo
+
+        if (checkboxes.length === 0) {
+            containerCalculados.innerHTML = "<p style='color: #888; text-align: center;'>Nenhum cardápio selecionado para exibição.</p>";
+            document.getElementById('resultado').style.display = 'block';
+            return;
         }
 
-        const nomeCardapioSelect = document.getElementById('cardapio').options[document.getElementById('cardapio').selectedIndex].text;
+        let textoWhatsCardapios = "";
+
+        // Loop calculando cada item marcado separadamente com espaçamento limpo
+        checkboxes.forEach((cb) => {
+            const cardapioKey = cb.value;
+            let precoUnitario = 0;
+            let precisaAvaliar = false;
+            let faixa = "";
+
+            if (cardapioKey === "personalizado" || totalIntegrais < 20) {
+                precisaAvaliar = true;
+            } else if (totalIntegrais >= 20 && totalIntegrais < 30) {
+                faixa = "faixa_20_30";
+            } else if (totalIntegrais >= 30 && totalIntegrais < 40) {
+                faixa = "faixa_30_40";
+            } else if (totalIntegrais >= 40 && totalIntegrais < 50) {
+                faixa = "faixa_40_50";
+            } else {
+                faixa = "faixa_acima_50";
+            }
+
+            if (!precisaAvaliar && faixa) {
+                precoUnitario = tabelaPrecos[faixa][cardapioKey];
+            }
+
+            const valorTotal = totalIntegrais * precoUnitario;
+            const nomeExibicao = nomesCardapios[cardapioKey];
+
+            // Cria o bloco visual individual no fundo branco
+            const bloco = document.createElement('div');
+            bloco.className = "cardapio-calculado-bloco";
+            
+            let htmlBloco = `<div class="cardapio-titulo-bloco">✨ ${nomeExibicao}</div>`;
+            if (precisaAvaliar) {
+                htmlBloco += `
+                    <div class="resultado-item"><span>Valor por Integral:</span> <strong>Sob consulta</strong></div>
+                    <div class="resultado-item total-item"><span>VALOR TOTAL:</span> <strong>Avaliar via WhatsApp</strong></div>
+                `;
+                textoWhatsCardapios += `-%20${nomeExibicao}:%20Sob%20consulta%0A`;
+            } else {
+                htmlBloco += `
+                    <div class="resultado-item"><span>Valor por Integral:</span> <strong>R$ ${precoUnitario},00</strong></div>
+                    <div class="resultado-item total-item"><span>VALOR TOTAL:</span> <strong>R$ ${valorTotal},00</strong></div>
+                `;
+                textoWhatsCardapios += `-%20${nomeExibicao}:%20R$%20${valorTotal},00%0A`;
+            }
+
+            bloco.innerHTML = htmlBloco;
+            containerCalculados.appendChild(bloco);
+        });
+
+        // Montagem do link definitivo do WhatsApp
         let msgWhatsapp = `Gostaria de confirmar meu pedido.%0A%0A`;
         msgWhatsapp += `*Solicitante:* ${nome}%0A`;
         msgWhatsapp += `*Data/Hora:* ${data} às ${horario}%0A`;
-        msgWhatsapp += `*Cardápio:* ${nomeCardapioSelect}%0A`;
-        msgWhatsapp += `*Convidados:* ${totalConvidados} (Adultos: ${adultos}, 7-11a: ${c7_11}, <7a: ${cMenor7})%0A`;
-        msgWhatsapp += `*Integrais Calculadas:* ${totalIntegrais} integrais (${adultos} adultos e ${totalCriancasGeral} crianças)%0A`;
-        msgWhatsapp += precisaAvaliar ? `*Valor:* A definir via avaliação manual por menos de 20 integrais ou menu personalizado.` : `*Valor Total:* R$ ${valorTotal},00`;
+        msgWhatsapp += `*Convidados:* ${totalConvidados} (Adultos: ${adultos}, Crianças: ${totalCriancasGeral})%0A`;
+        msgWhatsapp += `*Integrais Calculadas:* ${totalIntegrais} integrais%0A%0A`;
+        msgWhatsapp += `*Cardápios Selecionados e Valores:*%0A${textoWhatsCardapios}`;
 
         document.getElementById('whatsappLink').href = `https://wa.me/5592988472009?text=${msgWhatsapp}`;
         document.getElementById('resultado').style.display = 'block';
