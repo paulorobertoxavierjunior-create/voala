@@ -131,14 +131,21 @@
         }
 
         .info-box {
-            background: #F4F4F6;
-            border-left: 4px solid var(--dark-gray);
+            background: #FFF5EE;
+            border-left: 4px solid var(--orange-primary);
             padding: 15px;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-top: 20px;
             margin-bottom: 25px;
             line-height: 1.4;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .info-box a {
+            color: var(--orange-primary);
+            text-decoration: underline;
         }
 
         .btn {
@@ -255,7 +262,7 @@
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="crepe_prem" onchange="calcularOrcamento()"> Crepes Franceses - Premium</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec1" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 1</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec2" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 2</label>
-                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_prem" onchange="calcularOrcamento()"> Crepes + Pizza - Premium</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_prem" onchange="checkbox" value="pizza_prem" onchange="calcularOrcamento()"> Crepes + Pizza - Premium</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil" onchange="calcularOrcamento()"> Buffet Infantil</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="churrasco" onchange="calcularOrcamento()"> Churrasco do Chefe</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="feijoada" onchange="calcularOrcamento()"> Feijoada do Voalá!</label>
@@ -263,11 +270,7 @@
         </div>
 
         <div class="info-box">
-            <strong>O que já está incluso em todos os pacotes:</strong><br>
-            🍽️ <strong>Louças completas:</strong> talheres, taças e pratos.<br>
-            🥤 <strong>Bebidas de linha:</strong> Coca-cola, Coca-zero, Guaraná Antártica e sucos integrais (laranja/uva).<br>
-            🧑‍🍳 <strong>Equipe de Serviço:</strong> profissionais necessários (churrasqueiros, cozinheiros, garçons, copeiros).<br>
-            ⚠️ <em>Para restrições alimentares ou sucos naturais, clique no botão final.</em>
+            💡 Para orientação sobre a diferença dos cardápios, <a id="linkAjudaWhats" href="#" target="_blank">consulte um dos nossos atendentes clicando aqui</a>.
         </div>
 
         <button type="button" class="btn" onclick="calcularOrcamento()">Visualizar resumo matemático</button>
@@ -286,7 +289,6 @@
         <div id="containerCardapiosCalculados"></div>
 
         <div style="margin-top: 25px;">
-            <!-- Dispara a automação em lote da IA -->
             <button class="btn btn-ia" id="btnGerarIa" onclick="gerarPropostaComIA()">✨ Confirmar Pedido e Criar Design Premium</button>
         </div>
     </div>
@@ -314,6 +316,16 @@
 
     let payloadUltimoCalculo = {};
 
+    // Atualiza dinamicamente o link de ajuda do bloco do meio para chamar o WhatsApp
+    function atualizarLinkAjuda(nomeCliente) {
+        const baseMsg = `Olá! Estou usando o simulador do Voalá! Buffet e gostaria de receber orientações sobre a diferença e detalhes dos cardápios cadastrados.`;
+        const msgFinal = nomeCliente && nomeCliente !== "Não informado" ? `Olá! Me chamo ${nomeCliente}. ` + baseMsg : baseMsg;
+        document.getElementById('linkAjudaWhats').href = `https://api.whatsapp.com/send?phone=5592988472009&text=${encodeURIComponent(msgFinal)}`;
+    }
+
+    // Executa uma vez no início para deixar o link funcional mesmo vazio
+    atualizarLinkAjuda("");
+
     function calcularOrcamento() {
         const nome = document.getElementById('nome').value || "Não informado";
         const data = document.getElementById('data').value;
@@ -326,6 +338,8 @@
         const totalIntegrais = adultos + Math.floor(c7_11 / 2) + (cMenor7 >= 6 ? Math.floor(cMenor7 / 6) : 0);
         const totalConvidados = adultos + c7_11 + cMenor7;
         const totalCriancasGeral = c7_11 + cMenor7;
+
+        atualizarLinkAjuda(nome);
 
         document.getElementById('resNome').innerText = nome;
         document.getElementById('resDataHora').innerText = (data && horario) ? `${data.split('-').reverse().join('/')} às ${horario}` : "Aguardando definição...";
@@ -386,8 +400,8 @@
         - Volume Total: ${payloadUltimoCalculo.totalConvidados} convidados (${payloadUltimoCalculo.adultos} adultos e ${payloadUltimoCalculo.totalCriancasGeral} crianças)
         - Base de Cálculo: ${payloadUltimoCalculo.totalIntegrais} integrais operacionais
         - Estrutura Financeira dos Cardápios Escolhidos: ${JSON.stringify(payloadUltimoCalculo.listaResumos)}
-        
-        Cláusula de Atendimento Básica Inclusa: Fornecimento de louças completas (inox e vidro), bebidas de linha completas com refrigerantes e sucos integrais, logística estruturada e brigada de atendimento liderada pelo Chefe Paulo Xavier.
+       
+Cláusula de Atendimento Básica Inclusa: Fornecimento de louças completas (inox e vidro), bebidas de linha completas com refrigerantes e sucos integrais, logística estruturada e brigada de atendimento liderada pelo Chefe Paulo Xavier.
         Validade da Proposta Comercial: 30 dias lineares. Contato Institucional: (92) 98847-2009.`;
 
         try {
@@ -400,34 +414,31 @@
             const dadosJson = await resposta.json();
             let htmlGeradoPelaIa = dadosJson.candidates[0].content.parts[0].text;
 
-            // Limpa resíduos de markdown se houver
             htmlGeradoPelaIa = htmlGeradoPelaIa.replace(/```html/g, "").replace(/```/g, "").trim();
 
-            // Renderiza o documento na tela do cliente abrindo em nova guia nativa
             const novaJanelaProposta = window.open();
             novaJanelaProposta.document.open();
             novaJanelaProposta.document.write(htmlGeradoPelaIa);
             novaJanelaProposta.document.close();
 
-            // Formatação do texto do link para encaminhamento de leads no WhatsApp
             let cardapiosTexto = "";
             payloadUltimoCalculo.listaResumos.forEach((item) => {
                 cardapiosTexto += `-%20${item.nome}:%20R$%20${item.total},00%0A`;
             });
 
             let msgWhats = `Olá%20Chefe%20Paulo!%20Meu%20orçamento%20estilizado%20acaba%20de%20ser%20gerado%20pelo%20sistema.%0A%0A`;
-            msgWhats += `*Gostaria%20de%20confirmar%20meu%20pedido%20e%20verificar%20a%20agenda!*%0A%0A`;
+            msgWhats += `*Gostaria%20de%20confirmar%20meu%20pedido,%20entender%20as%20diferenças%20dos%20cardápios%20e%20verificar%20a%20agenda!*%0A%0A`;
             msgWhats += `•%20*Solicitante:*%20${payloadUltimoCalculo.nome}%0A`;
             msgWhats += `•%20*Data/Hora:*%20${payloadUltimoCalculo.data.split('-').reverse().join('/')}%20às%20${payloadUltimoCalculo.horario}%0A`;
             msgWhats += `•%20*Integrais:*%20${payloadUltimoCalculo.totalIntegrais}%20calculadas%0A`;
             msgWhats += `•%20*Valores%20Simulados:*%0A${cardapiosTexto}%0A`;
-            msgWhats += `_A%20página%20com%20o%20design%20de%20luxo%20abriu%20aqui%20na%20minha%20tela,%20vou%20te%20enviar%20o%20print/PDF!_`;
+            msgWhats += `_A%20página%20com%20o%20design%20de%20luxo%20abriu%20aqui%20na%20minha%20tela,%20vamos%20definir%20os%20pratos!_`;
 
             window.open(`https://api.whatsapp.com/send?phone=5592988472009&text=${msgWhats}`, '_blank');
 
         } catch (erro) {
             console.error(erro);
-            alert("Ocorreu uma falha no processamento do motor de IA. Verifique as credenciais no código matriz.");
+            alert("Ocorreu uma falha no desenvolvimento do layout pela IA. Valide a chave de API inserida no código-fonte.");
         } finally {
             btn.innerText = "✨ Confirmar Pedido e Criar Design Premium";
             btn.disabled = false;
