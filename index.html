@@ -4,7 +4,128 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contrato – VOALÁ! BUFFET</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilo Base Geral */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Painel de Campos - Clean, Fundo Branco */
+    #painel {
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      width: 320px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    #painel h2 {
+      margin-top: 0;
+      color: #333;
+      font-size: 20px;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+    }
+
+    #painel label {
+      display: block;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #painel input {
+      width: 100%;
+      padding: 8px 10px;
+      margin-top: 4px;
+      border: 1px solid #dcdcdc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 14px;
+      color: #333;
+      background-color: #fafafa;
+      transition: border-color 0.2s;
+    }
+
+    #painel input:focus {
+      border-color: #ff7a00;
+      outline: none;
+      background-color: #fff;
+    }
+
+    /* Botões em Tons de Laranja */
+    #painel button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    #painel button:nth-of-type(1) {
+      background-color: #ff914d;
+      color: white;
+    }
+
+    #painel button:nth-of-type(1):hover {
+      background-color: #ff7a29;
+    }
+
+    #painel button:nth-of-type(2) {
+      background-color: #e65c00;
+      color: white;
+    }
+
+    #painel button:nth-of-type(2):hover {
+      background-color: #cc5200;
+    }
+    
+    #painel button:active {
+      transform: scale(0.98);
+    }
+
+    /* Preview do Contrato Centralizado */
+    #contrato {
+      background-color: #ffffff;
+      width: 595px; /* Largura proporcional ao A4 */
+      min-height: 842px;
+      padding: 40px 50px; /* Margens internas confortáveis */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    /* Ajuste fino do texto para caber em 1 página */
+    #conteudo {
+      font-size: 11px; /* Diminuído ligeiramente para evitar quebra */
+      line-height: 1.4;
+      color: #222;
+      text-align: justify;
+    }
+
+    #conteudo h1, #conteudo h2, #conteudo h3 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #000;
+    }
+  </style>
 </head>
 <body>
 
@@ -22,8 +143,7 @@
     <input id="cpfContratante" type="text" value="933.236.972-00" />
 
     <label>Endereço do(a) Contratante</label>
-    <input id="endContratante" type="text"
-           value="Rua Boacha, nº 19A, Novo Aleixo, Manaus/AM" />
+    <input id="endContratante" type="text" value="Rua Boacha, nº 19A, Novo Aleixo, Manaus/AM" />
 
     <label>Nome da Contratada (responsável)</label>
     <input id="nomeContratada" type="text" value="Paulo Roberto Xavier Júnior" />
@@ -32,8 +152,7 @@
     <input id="cpfContratada" type="text" value="060.610.385-40" />
 
     <label>Endereço da Contratada</label>
-    <input id="endContratada" type="text"
-           value="Rua Jaguaquara, nº 391, Alvorada, Manaus/AM" />
+    <input id="endContratada" type="text" value="Rua Jaguaquara, nº 391, Alvorada, Manaus/AM" />
 
     <label>Data do Evento</label>
     <input id="dataEvento" type="text" value="25/07/2026" />
@@ -45,7 +164,7 @@
     <input id="localEvento" type="text" value="Village Festas" />
 
     <label>Número de Convidados</label>
-    <input id="numConvidados" type="text" value="150 adultos" />
+    <input id="numConvidados" type="text" value="150 adults" />
 
     <label>Tipo de Serviço</label>
     <input id="tipoServico" type="text" value="Buffet de crepe francês" />
@@ -54,8 +173,7 @@
     <input id="valorTotal" type="text" value="3.700,00" />
 
     <label>Valor Total por Extenso</label>
-    <input id="valorExtenso" type="text"
-           value="três mil e setecentos reais" />
+    <input id="valorExtenso" type="text" value="três mil e setecentos reais" />
 
     <label>Hora extra (R$ por funcionário)</label>
     <input id="horaExtra" type="text" value="30,00" />
@@ -79,10 +197,10 @@
     <button onclick="gerarPDF()">Gerar PDF</button>
   </div>
 
-  <!-- PREVIEW DO CONTRATO (UMA COLUNA) -->
+  <!-- PREVIEW DO CONTRATO -->
   <div id="contrato">
     <div id="conteudo">
-      <!-- O JS injeta o contrato aqui -->
+      <!-- Injetado via JS -->
     </div>
   </div>
 
