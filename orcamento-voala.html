@@ -110,7 +110,7 @@
             padding: 15px;
             border-radius: 8px;
             border: 1px solid rgba(255, 102, 0, 0.2);
-            max-height: 250px;
+            max-height: 280px;
             overflow-y: auto;
         }
 
@@ -263,7 +263,10 @@
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec1" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 1</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_exec2" onchange="calcularOrcamento()"> Crepes + Pizza - Executivo 2</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="pizza_prem" onchange="calcularOrcamento()"> Crepes + Pizza - Premium</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="rodizio_pizza" onchange="calcularOrcamento()"> Rodízio de Pizza</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="rodizio_pizza_massas" onchange="calcularOrcamento()"> Rodízio de Pizza + Massas</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil" onchange="calcularOrcamento()"> Buffet Infantil</label>
+                <label class="checkbox-item"><input type="checkbox" name="cardapios" value="infantil_massas" onchange="calcularOrcamento()"> Buffet Infantil + Massas</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="churrasco" onchange="calcularOrcamento()"> Churrasco do Chefe</label>
                 <label class="checkbox-item"><input type="checkbox" name="cardapios" value="feijoada" onchange="calcularOrcamento()"> Feijoada do Voalá!</label>
             </div>
@@ -298,27 +301,45 @@
     // =======================================================
     //         ESPAÇO MATRIZ: CHAVE DIVIDIDA EM DOIS TEXTOS
     // =======================================================
-    // Cole aqui os primeiros 15 ou 20 caracteres da sua chave (ex: "AIzaSyAz...")
     const textoInicio = "AQ.Ab8RN6IFnrDy0oX73mN7rreDcrm5lo"; 
-    
-    // Cole aqui o restante final da sua chave
     const textoFim = "KEMsJkcjAN_MbDMbkrtg"; 
 
-    // O sistema junta os dois textos puro e gera a chave final para rodar a chamada
     const GEMINI_API_KEY = textoInicio + textoFim;
     // =======================================================
 
     const tabelaPrecos = {
-        faixa_20_30: { crepe_exec1: 120, crepe_exec2: 125, crepe_prem: 130, pizza_exec1: 125, pizza_exec2: 130, pizza_prem: 135, infantil: 110, churrasco: 120, feijoada: 95 },
-        faixa_30_40: { crepe_exec1: 100, crepe_exec2: 110, crepe_prem: 120, pizza_exec1: 110, pizza_exec2: 120, pizza_prem: 130, infantil: 100, churrasco: 100, feijoada: 90 },
-        faixa_40_50: { crepe_exec1: 95,  crepe_exec2: 100, crepe_prem: 105, pizza_exec1: 105, pizza_exec2: 110, pizza_prem: 115, infantil: 90,  churrasco: 95,  feijoada: 85 },
-        faixa_acima_50: { crepe_exec1: 90, crepe_exec2: 95, crepe_prem: 100, pizza_exec1: 100, pizza_exec2: 105, pizza_prem: 110, infantil: 90, churrasco: 95,  feijoada: 80 }
+        faixa_20_30: { 
+            crepe_exec1: 120, crepe_exec2: 125, crepe_prem: 130, 
+            pizza_exec1: 125, pizza_exec2: 130, pizza_prem: 135, 
+            infantil: 110, rodizio_pizza: 110,
+            churrasco: 120, feijoada: 95 
+        },
+        faixa_30_40: { 
+            crepe_exec1: 100, crepe_exec2: 110, crepe_prem: 120, 
+            pizza_exec1: 110, pizza_exec2: 120, pizza_prem: 130, 
+            infantil: 100, rodizio_pizza: 100,
+            churrasco: 100, feijoada: 90 
+        },
+        faixa_40_50: { 
+            crepe_exec1: 95,  crepe_exec2: 100, crepe_prem: 105, 
+            pizza_exec1: 105, pizza_exec2: 110, pizza_prem: 115, 
+            infantil: 90,  rodizio_pizza: 90,
+            churrasco: 95,  feijoada: 85 
+        },
+        faixa_acima_50: { 
+            crepe_exec1: 90, crepe_exec2: 95, crepe_prem: 100, 
+            pizza_exec1: 100, pizza_exec2: 105, pizza_prem: 110, 
+            infantil: 90, rodizio_pizza: 90,
+            churrasco: 95,  feijoada: 80 
+        }
     };
 
     const nomesCardapios = {
         crepe_exec1: "Crepes Franceses - Executivo 1", crepe_exec2: "Crepes Franceses - Executivo 2", crepe_prem: "Crepes Franceses - Premium",
         pizza_exec1: "Crepes + Pizza - Executivo 1", pizza_exec2: "Crepes + Pizza - Executivo 2", pizza_prem: "Crepes + Pizza - Premium",
-        infantil: "Buffet Infantil", churrasco: "Churrasco do Chefe", feijoada: "Feijoada do Voalá!"
+        rodizio_pizza: "Rodízio de Pizza", rodizio_pizza_massas: "Rodízio de Pizza + Massas",
+        infantil: "Buffet Infantil", infantil_massas: "Buffet Infantil + Massas",
+        churrasco: "Churrasco do Chefe", feijoada: "Feijoada do Voalá!"
     };
 
     let payloadUltimoCalculo = {};
@@ -366,8 +387,22 @@
         checkboxes.forEach((cb) => {
             const cardapioKey = cb.value;
             let faixa = totalIntegrais >= 50 ? "faixa_acima_50" : totalIntegrais >= 40 ? "faixa_40_50" : totalIntegrais >= 30 ? "faixa_30_40" : "faixa_20_30";
-            let precoUnitario = tabelaPrecos[faixa][cardapioKey] || 100;
-            let valorTotal = totalIntegrais * precoUnitario;
+            
+            let precoUnitario = 100;
+            let valorTotal = 0;
+
+            // Regra especial para Massas (Soma 15 reais por integral e arredonda o pacote pra centena acima)
+            if (cardapioKey === 'rodizio_pizza_massas' || cardapioKey === 'infantil_massas') {
+                const precoBaseInfantil = tabelaPrecos[faixa]['infantil'] || 100;
+                precoUnitario = precoBaseInfantil + 15;
+                const subtotal = totalIntegrais * precoUnitario;
+                
+                // Arredonda para a centena superior mais próxima (ex: 65 -> 100, 125 -> 200, 205 -> 300)
+                valorTotal = Math.ceil(subtotal / 100) * 100;
+            } else {
+                precoUnitario = tabelaPrecos[faixa][cardapioKey] || 100;
+                valorTotal = totalIntegrais * precoUnitario;
+            }
 
             listaResumos.push({ nome: nomesCardapios[cardapioKey], unitario: precoUnitario, total: valorTotal });
 
@@ -453,4 +488,3 @@
 
 </body>
 </html>
-
