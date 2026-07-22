@@ -148,6 +148,7 @@
             text-decoration: underline;
         }
 
+
         .btn {
             font-family: 'Orbitron', sans-serif;
             background: var(--orange-primary);
@@ -298,7 +299,8 @@
 </div>
 
 <script>
-    // =======================================================
+
+// =======================================================
     //         ESPAÇO MATRIZ: CHAVE DIVIDIDA EM DOIS TEXTOS
     // =======================================================
     const textoInicio = "AQ.Ab8RN6IFnrDy0oX73mN7rreDcrm5lo"; 
@@ -391,13 +393,10 @@
             let precoUnitario = 100;
             let valorTotal = 0;
 
-            // Regra especial para Massas (Soma 15 reais por integral e arredonda o pacote pra centena acima)
             if (cardapioKey === 'rodizio_pizza_massas' || cardapioKey === 'infantil_massas') {
                 const precoBaseInfantil = tabelaPrecos[faixa]['infantil'] || 100;
                 precoUnitario = precoBaseInfantil + 15;
                 const subtotal = totalIntegrais * precoUnitario;
-                
-                // Arredonda para a centena superior mais próxima (ex: 65 -> 100, 125 -> 200, 205 -> 300)
                 valorTotal = Math.ceil(subtotal / 100) * 100;
             } else {
                 precoUnitario = tabelaPrecos[faixa][cardapioKey] || 100;
@@ -423,10 +422,39 @@
         }
 
         const btn = document.getElementById("btnGerarIa");
-        btn.innerText = "IA Gerando Catálogo Customizado...";
+        btn.innerText = "⏳ Gerando Proposta Visual...";
         btn.disabled = true;
 
-        const promptia = `Você é um Web Designer Sênior e Projetista Comercial Executivo.
+        // Abertura imediata da janela para evitar o bloqueador de pop-ups do navegador
+        const novaJanelaProposta = window.open("", "_blank");
+        if (novaJanelaProposta) {
+            novaJanelaProposta.document.write(`
+                <html>
+                <head>
+                    <title>Gerando Proposta - Voalá! Buffet</title>
+                    <style>
+                        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #FAFAFA; color: #333; text-align: center; }
+                        .loader { border: 5px solid #f3f3f3; border-top: 5px solid #FF6600; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+                        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+                    </style>
+                </head>
+                <body>
+                    <div>
+                        <div class="loader"></div>
+                        <h2>A Inteligência Artificial está montando seu catálogo premium...</h2>
+                        <p>Por favor, aguarde alguns segundos.</p>
+                    </div>
+                </body>
+                </html>
+            `);
+        } else {
+            alert("O navegador bloqueou a janela pop-up. Por favor, permita aberturas de pop-up para este site.");
+            btn.innerText = "✨ Confirmar Pedido e Criar Design Premium";
+            btn.disabled = false;
+            return;
+        }
+
+const promptia = `Você é um Web Designer Sênior e Projetista Comercial Executivo.
         Construa um código de página HTML completo, elegante e independente contendo uma Proposta Comercial Visual Premium (Padrão Canva/Portfólio Editorial de Vendas) para o "Voalá! Buffet".
         Utilize fontes limpas e luxuosas do Google Fonts, uma paleta sofisticada com fundo off-white/creme bem claro, tipografias pretas e detalhes em dourado escuro ou laranjas da marca.
         O layout deve conter caixas simétricas e limpas organizando os detalhes do evento fornecidos.
@@ -452,11 +480,14 @@
             });
 
             const dadosJson = await resposta.json();
-            let htmlGeradoPelaIa = dadosJson.candidates[0].content.parts[0].text;
 
+            if (!dadosJson.candidates || !dadosJson.candidates[0]) {
+                throw new Error("Erro na resposta da API: " + JSON.stringify(dadosJson));
+            }
+
+            let htmlGeradoPelaIa = dadosJson.candidates[0].content.parts[0].text;
             htmlGeradoPelaIa = htmlGeradoPelaIa.replace(/```html/g, "").replace(/```/g, "").trim();
 
-            const novaJanelaProposta = window.open();
             novaJanelaProposta.document.open();
             novaJanelaProposta.document.write(htmlGeradoPelaIa);
             novaJanelaProposta.document.close();
@@ -477,8 +508,9 @@
             window.open(`https://api.whatsapp.com/send?phone=5592988472009&text=${msgWhats}`, '_blank');
 
         } catch (erro) {
-            console.error(erro);
-            alert("Ocorreu uma falha no desenvolvimento do layout pela IA. Valide a chave de API inserida no código-fonte.");
+            console.error("Erro completo:", erro);
+            if (novaJanelaProposta) novaJanelaProposta.close();
+            alert("Ocorreu uma falha na criação do layout pela IA. Verifique o console do navegador ou a chave da API.");
         } finally {
             btn.innerText = "✨ Confirmar Pedido e Criar Design Premium";
             btn.disabled = false;
